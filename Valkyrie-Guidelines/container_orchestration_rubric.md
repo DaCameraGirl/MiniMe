@@ -1,12 +1,12 @@
 Strict Prompt Rubric:
-[+10] Response compares operational complexity for logging/monitoring between K8s and Nomad
-[+10] Analyzes networking approaches across clouds including latency/security tradeoffs
-[+8] Details compliance enforcement mechanisms in both systems
-[+8] Provides 2+ real outage examples with root causes
-[+5] Discusses team skill requirements for each platform
-[-10] Claims either system is "perfect" for all use cases
-[-5] Omits discussion of stateful service challenges  
-[-3] Recommends without considering compliance needs
+[+10] The response must compare operational complexity for logging/monitoring between Kubernetes and Nomad
+[+10] The response must analyze multi-cloud networking approaches including latency/security tradeoffs
+[+8] The response must detail compliance enforcement mechanisms in both systems
+[+8] The response must provide 2+ real outage examples with root causes
+[+5] The response must discuss team skill requirements for each platform
+[-10] The response claims either system is "perfect" for all use cases
+[-5] The response omits discussion of stateful service challenges
+[-3] The response recommends an approach without considering compliance needs
 
 Example [+10]:
 "Kubernetes requires service meshes for advanced networking which adds complexity, while Nomad's simpler architecture needs less instrumentation but offers fewer built-in controls"

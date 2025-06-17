@@ -1,3 +1,41 @@
+# Project Setup Guide
+
+## Windows Installation
+
+### Prerequisites
+- Windows 10/11
+- Python 3.8+ (install from [python.org](https://www.python.org/downloads/windows/))
+  - Check "Add Python to PATH" during installation
+- Git for Windows (install from [git-scm.com](https://git-scm.com/download/win))
+
+### Quick Start
+1. Open Command Prompt as Administrator
+```cmd
+git clone https://github.com/your-repo/project.git
+cd project
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+2. Configure Environment Variables:
+```cmd
+set FLASK_APP=app.py
+set FLASK_ENV=development
+```
+
+3. Run the application:
+```cmd
+flask run
+```
+
+For troubleshooting common Windows issues:
+- If you get "script execution disabled" errors, run:
+```cmd
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+- For SQLite database issues, ensure the db file path uses forward slashes (/) 
+
 📚 Valkyrie Project Guidelines
 
 🧠 Mental Model: Write Like a Real User

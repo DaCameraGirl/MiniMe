@@ -1,0 +1,9 @@
+[submodule "rubric-creator"]
+	path = rubric-creator
+	url = https://github.com/thegraidenetwork/rubric-creator
+[submodule "create-rubric-app"]
+	path = create-rubric-app
+	url = https://github.com/RubricLab/create-rubric-app
+[submodule "ai-rubric-generator"]
+	path = ai-rubric-generator
+	url = https://github.com/hamisbela/ai-rubric-generator

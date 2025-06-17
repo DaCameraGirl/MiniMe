@@ -36,6 +36,56 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 - For SQLite database issues, ensure the db file path uses forward slashes (/) 
 
+# Project Setup Guide
+
+## Windows Installation
+
+### Prerequisites
+- Windows 10/11
+- Python 3.8+ ([Download Python](https://www.python.org/downloads/windows/))
+  - Check "Add Python to PATH" during installation
+- [Git for Windows](https://git-scm.com/download/win)
+
+### Installation Steps
+1. Clone the repository:
+```cmd
+git clone https://github.com/your-repo/project.git
+cd project
+```
+
+2. Create and activate virtual environment:
+```cmd
+python -m venv venv
+venv\Scripts\activate
+```
+
+3. Install dependencies:
+```cmd
+pip install -r requirements.txt
+```
+
+### Configuration
+Set environment variables in Command Prompt:
+```cmd
+set FLASK_APP=app.py
+set FLASK_ENV=development
+```
+
+### Running the Application
+Start the development server:
+```cmd
+flask run
+```
+
+### Troubleshooting
+Common Windows issues and solutions:
+- **Script execution disabled**: 
+```cmd
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+- **Database path issues**: Use forward slashes (/) in paths
+- **Missing DLL errors**: Install the latest [Visual C++ Redistributable](https://aka.ms/vs/17/release/vc_redist.x64.exe)
+
 📚 Valkyrie Project Guidelines
 
 🧠 Mental Model: Write Like a Real User

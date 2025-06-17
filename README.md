@@ -1,5 +1,13 @@
+📚 Valkyrie Project Guidelines
+
 🧠 Mental Model: Write Like a Real User
 
+
+Knowledge Cutoff Date: The model has no knowledge of the world after January 31, 2023. Requesting information after this date is not allowed. 
+
+Reference Texts: Any documents you'd like to model to utilize must be copied and pasted into the Attachment tool below the prompt box. 100,000 word maximum.
+
+No General Internet Search: The model has knowledge of the world, but does not have internet access. If you’d like it to reference specific information, please provide that information as a reference text. 
 A strong prompt should sound like something you’d actually type into ChatGPT mid-task. Picture it: you’re working on something, hit a tricky spot, and ask a question to get unstuck. That’s what good prompts look like—natural, specific, and grounded in real work.
 
 You're not writing a test.

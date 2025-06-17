@@ -1,0 +1,12 @@
+[submodule "Documents/rubric-creator"]
+	path = Documents/rubric-creator
+	url = https://github.com/thegraidenetwork/rubric-creator
+[submodule "Documents/create-rubric-app"]
+	path = Documents/create-rubric-app
+	url = https://github.com/RubricLab/create-rubric-app
+[submodule "Documents/ai-rubric-generator"]
+	path = Documents/ai-rubric-generator
+	url = https://github.com/hamisbela/ai-rubric-generator
+[submodule "Documents/ZemDocs"]
+	path = Documents/ZemDocs
+	url = https://github.com/Zemerik/ZemDocs

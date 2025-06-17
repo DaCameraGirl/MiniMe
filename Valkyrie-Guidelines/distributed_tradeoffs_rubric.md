@@ -1,15 +1,12 @@
-Rubric Criteria (+/- weights indicate importance):
-[+10] Response clearly differentiates how writes propagate in strong vs eventual consistency models
-[+8] Explains at least two concrete resolution strategies for write conflicts in eventual consistency systems (e.g. last-write-wins, CRDTs)
-[+7] Quantifies the latency impact of strong consistency with round-trips between regions
-[+6] Details the debugging tools/techniques needed for diagnosing inconsistencies in eventual consistent systems
-[+5] Mentions the operational overhead of maintaining cross-region coordination in strong consistency
-[-5] Fails to mention the CAP theorem implications for partition tolerance
-[-3] Suggests eventual consistency is always better without qualifying tradeoffs
-[-3] Omits discussion of stale reads in eventual consistency models
+Rubric Criteria:
+[+10] Explains write propagation differences (sync vs async) with concrete examples
+[+8] Details two real debugging incidents/tools for each approach (e.g. DynamoDB vs Cassandra issues)
+[+7] Compares latency distributions showing impact of coordination rounds
+[+5] Mentions tradeoffs in team velocity and error rates from real production systems
+[-5] Claims DC failures won't impact availability in strong consistency systems
+[-3] Omits discussion of memory/disk overhead differences
+[-3] Suggests one size fits all without workload context
 
-Example of meeting [+10] criterion: 
-"Strong consistency requires synchronous replication before acknowledging writes, while eventual consistency allows asynchronous propagation with potential temporary divergence."
+Example [+10]: "Shopify moved from strong to eventual consistency for carts, reducing checkout latency by 300ms but requiring new reconciliation workers"
 
-Example of [-5] violation:
-"The system will maintain perfect consistency during network partitions" (false for partition-tolerant systems)
+Violation [-5]: "Our strong consistent system will never lose writes during outages"

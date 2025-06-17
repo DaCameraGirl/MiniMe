@@ -10,3 +10,63 @@
 [submodule "Documents/ZemDocs"]
 	path = Documents/ZemDocs
 	url = https://github.com/Zemerik/ZemDocs
+[submodule "Documents/Typescript-advance"]
+	path = Documents/Typescript-advance
+	url = https://github.com/virajpwdn/Typescript-advance
+[submodule "Documents/Coding-Practice-32-CAR"]
+	path = Documents/Coding-Practice-32-CAR
+	url = https://github.com/namensenn/Coding-Practice-32-CAR
+[submodule "Documents/JAVA"]
+	path = Documents/JAVA
+	url = https://github.com/suryadwd/JAVA
+[submodule "Documents/how_to_become_10x_developer"]
+	path = Documents/how_to_become_10x_developer
+	url = https://github.com/prazian/how_to_become_10x_developer
+[submodule "Documents/thesis"]
+	path = Documents/thesis
+	url = https://github.com/alueg/thesis
+[submodule "Documents/ui-gen"]
+	path = Documents/ui-gen
+	url = https://github.com/yousseftastift/ui-gen
+[submodule "Documents/STT-Wizard"]
+	path = Documents/STT-Wizard
+	url = https://github.com/Scikous/STT-Wizard
+[submodule "Documents/TTS-Wizard"]
+	path = Documents/TTS-Wizard
+	url = https://github.com/Scikous/TTS-Wizard
+[submodule "Documents/LLM-Wizard"]
+	path = Documents/LLM-Wizard
+	url = https://github.com/Scikous/LLM-Wizard
+[submodule "Documents/opyrator"]
+	path = Documents/opyrator
+	url = https://github.com/ml-tooling/opyrator
+[submodule "Documents/cs-field-guide"]
+	path = Documents/cs-field-guide
+	url = https://github.com/uccser/cs-field-guide
+[submodule "Documents/Neura-AI"]
+	path = Documents/Neura-AI
+	url = https://github.com/joshivanhilario/Neura-AI
+[submodule "Documents/live-wallpaper"]
+	path = Documents/live-wallpaper
+	url = https://github.com/jhgdfuygfdukbyihs/live-wallpaper
+[submodule "Documents/ml-pipeline-wine-azure"]
+	path = Documents/ml-pipeline-wine-azure
+	url = https://github.com/HammadNazir048/ml-pipeline-wine-azure
+[submodule "Documents/Gemini-Chatbot-Interface-with-Streamlit"]
+	path = Documents/Gemini-Chatbot-Interface-with-Streamlit
+	url = https://github.com/ilhansevval/Gemini-Chatbot-Interface-with-Streamlit
+[submodule "Documents/yew"]
+	path = Documents/yew
+	url = https://github.com/yewstack/yew
+[submodule "Documents/easydiffusion"]
+	path = Documents/easydiffusion
+	url = https://github.com/easydiffusion/easydiffusion
+[submodule "Documents/nicegui"]
+	path = Documents/nicegui
+	url = https://github.com/zauberzeug/nicegui
+[submodule "Documents/lvgl"]
+	path = Documents/lvgl
+	url = https://github.com/lvgl/lvgl
+[submodule "Documents/MLDebugging"]
+	path = Documents/MLDebugging
+	url = https://github.com/hjyTsuki/MLDebugging

@@ -1,0 +1,39 @@
+Valkyrie Category & SubCategories
+
+Valkyrie: Project Specifications.
+
+This project trains AI models for real-world expert challenges using two key components: prompts and rubrics. The goal of the project is to ask questions that are actually important or relevant to you. Questions where you are uniquely capable of deciding what a great response would look like. You'll create prompts relevant to your expertise and develop rubrics defining excellence for objective evaluation.
+
+Uploading Images – You may include an image as part of your task. However, your prompt must require the image to be answered. It should not be possible to complete the task without referring to the image—the image must be essential to solving it. Please do NOT use copyrighted images or images with content protected by NDA (screenshots of internal memos, etc)
+
+Updated Prompt Guidance: Avoid prompts that feel artificial—no personas, no excessive constraints, no multi-part exam-style asks. Keep it realistic, focused, and grounded in something an expert would ask at work. 
+
+reference text word limit from 2,000 words to 100,000 words, prompt requirement from Clearly Defined to Clear Assumptions to leave room for subjective interpretation of what makes a great response.
+
+The average of the two final scores is less than 80%, and both are less than 85%
+
+
+Prompts may now include elements that require a GTFA, as long as the overall prompt requires a rubric to be fully and properly addressed. If your prompt can be answered with one line and that is the only correct answer, then the prompt is bad.
+
+ Top Tips
+The goal of the task is to generate a task where both models produce subpar or bad responses
+The average of the two final scores is less than  80%, and both are less than 85%
+Role playing (you are xyz), persona questions are the worst kind of prompts. Please make your prompt unique to your expertise/field, and something you would ask a colleague
+The prompt should require the response to have substantial analysis, interpretation, or creative thinking rather than just mechanical problem-solving
+Bad prompts are pure mathematical, factual, procedural, or formulaic problems where experts would get to the same answer 90% of the time
+You do not need a complex prompt with a long list of requests; however, each prompt should be meaningful. Adding a ton of requests will make rubrics difficult and lead to a bad and unnatural prompt
+Focus on questions that you or another expert in your field would actually care about. Do not request contrived/adjacent things like making a lesson plan
+Rubrics are a pedantic exercise; make sure you review the rubrics instructions multiple times
+Rubrics should be atomic (they do not combine multiple requirements into one)
+Rubrics should be self contained (they contain an example and can be answered true or false by any layman)
+For negative weights, make sure the rubric is about the inclusion of a bad detail and is in the affirmative
+Negative weights highlight actual mistakes, inaccuracies, or harmful/irrelevant content that detract from a response's quality.
+Do not use should or must for rubrics with negative weights
+The core requests/requirements should have the highest weights
+Rubrics should be comprehensive of what a great response would be and include all explicit requests from the prompt
+Check the final checklist prior to submission
+If you get a task with a subject outside of your subject matter, skip it until you find one within your subject matter. There’s unlimited tasks so just skip please.
+
+
+
+

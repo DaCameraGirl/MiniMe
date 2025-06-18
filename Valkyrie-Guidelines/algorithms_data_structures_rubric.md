@@ -1,8 +1,8 @@
 # Ford-Fulkerson Documentation Rubric
 
-### Implementation Correctness (40 points)
-1. Creates virtual super-source (S) connecting A,B and super-sink (T) from E,F (+8)
-2. Implements residual edges with capacity formula: residual[u][v] = graph[u][v] - flow[u][v] (+7)
+### Implementation Validation (40 points)
+1. Creates virtual super-source connecting all factories (A,B) with ∞ capacity (+8)
+2. Implements backward edges in residual graph using flow reversal logic (+7)
 3. Shows augmenting path discovery steps for sample graph (A->B->E->F path first) (+6)
 4. Calculates max flow as 30 (15 from A->B->E->F + 15 from A->C->E->F) (+10)
 5. Handles zero-capacity edges by excluding them from residual paths (+5)

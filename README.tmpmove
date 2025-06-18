@@ -26,8 +26,6 @@ Don’t Over-Explain: Assume the model is a capable expert. Skip step-by-step in
 
 No Single Correct Answer: Good prompts support diverse, well-reasoned outputs—not just one “right” answer. Rubrics are built to evaluate variability.
 
-https://docs.google.com/document/d/e/2PACX-1vQ6NYJWmjGl_TUFo8nJ581xZsU0sUx0bxXlL-8GU5SJWOcf6kwnNUrJP0cHbdz5EFYWHxp2YdZk01Hm/pub
-
 Natural Tone - No Personas
 
 Goal: Write the way you’d actually ask a colleague or type into ChatGPT mid-task. You’d never start your questions to a colleague with “I am…” or “You are…”—so don’t do it here.
@@ -1208,21 +1206,6 @@ All Criteria
 
 All responses score less than 80% on Rubric Evaluation
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-your
 Valkyrie Category & SubCategories
 
 Valkyrie: Project Specifications.

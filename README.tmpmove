@@ -1,4 +1,4 @@
-i havent put it anywhre i have th elink I NEED HIM TO SCORE LIKE THIS HE DID LAST NIGHT HNOW HES NOT 🧠 Mental Model: Write Like a Real User
+PROMPT CREATION WITH RUBRICS
 
 A strong prompt should sound like something you’d actually type into ChatGPT mid-task. Picture it: you’re working on something, hit a tricky spot, and ask a question to get unstuck. That’s what good prompts look like—natural, specific, and grounded in real work.
 
@@ -139,6 +139,7 @@ Why It’s Good: It mirrors how experts naturally ask for help mid-analysis—gr
 🚫 Bad: *I want to create an econometric model to study how wages respond to changes in the federal EITC policy. *
 
 Why it’s bad: Everything in red is artificial complexity. Any economist would know to do these things as they are standard procedures in developing an econometric model. Don’t hand-hold or spell out what’s already standard in the field.
+The first goal of the task if to ccraft a natural genuine authentic prompt of user's choice and subcaetory, as well as a rubric that maintains guidlines for great rubrics for a prompt, then you will recieve 4 responses based off the prompt crafted with rubrics and you will grade the responses bases on the weighted rubric and out put answers in a file.
 
 The goal of the task is to generate a task where both models produce subpar or bad responses
 Average of two final scores is less than  80% and both are less than 85%

@@ -1,17 +1,35 @@
-# Algorithm Documentation Rubric
+# Ford-Fulkerson Documentation Rubric
 
-### Core Criteria
-1. Correctly identifies the need for a super-source/super-sink approach (+8)
-2. Implements residual graph updates properly with path backtracking (+7)
-3. Handles edge cases with zero-capacity edges and cyclic paths (+6)
-4. Includes time complexity analysis distinguishing O(E|f*|) vs O(VE²) cases (+5)
+### Implementation Correctness (40 points)
+1. Creates virtual super-source (S) connecting A,B and super-sink (T) from E,F (+8)
+2. Implements residual edges with capacity formula: residual[u][v] = graph[u][v] - flow[u][v] (+7)
+3. Shows augmenting path discovery steps for sample graph (A->B->E->F path first) (+6)
+4. Calculates max flow as 30 (15 from A->B->E->F + 15 from A->C->E->F) (+10)
+5. Handles zero-capacity edges by excluding them from residual paths (+5)
+6. Includes time complexity analysis: O(E * max_flow) for DFS, O(VE²) for BFS (+4)
 
-### Quality Differentiators
-1. Compares BFS (Edmonds-Karp) vs DFS approaches (-3 if missing)
-2. Provides test cases with asymmetric source/sink configurations (+4)
-3. Diagrams showing residual graph transformations (+3)
+### Code Quality (30 points)
+1. Uses adjacency matrix with capacity values matching sample graph edges (+6)
+2. Implements path backtracking with parent pointer array (+5)
+3. Includes validation test for flow conservation: Σin = Σout except S/T (+5)
+4. Provides 3 test cases: 
+   - Single source/sink (score 25)
+   - Multiple sources (score 30)
+   - Cyclic graph (score 15) (+8)
+5. Benchmarking setup with time/space metrics for 1000-node graphs (+6)
 
-### Critical Errors
-1. Fails to handle backward edges in residual graph (-6)
-2. Allows flow conservation violations at regular nodes (-8)
-3. Incorrectly reports max flow for given example graph (-10)
+### Documentation Standards (30 points)
+1. Includes SVG/ASCII diagram of residual graph at each augmentation step (+8)
+2. Compares DFS stack vs BFS queue implementations in performance table (+6)
+3. Lists 3 real-world applications: network routing, airline scheduling, bipartite matching (+5)
+4. Provides 2 practice problems:
+   - Modify for vertex capacities
+   - Handle dynamic edge updates (+7)
+5. Cites 3 academic sources including Cormen et al. (+4)
+
+### Critical Errors (-40 points)
+1. Missing super-node handling (directly uses original sources/sinks) (-12)
+2. Fails to update backward edges in residual graph (-10)
+3. Allows negative flow values in calculations (-8)
+4. Omits bottleneck calculation in augmenting paths (-6)
+5. Uses incorrect O-notation (e.g. claims O(E)) (-4)

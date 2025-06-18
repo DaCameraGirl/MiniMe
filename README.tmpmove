@@ -150,8 +150,35 @@ Rubrics are a pedantic exercise; make sure you review the rubrics instructions m
 Rubrics should be atomic (they do not combine multiple requirements into one)
 Rubrics should be self contained (they contain an example and can be answered true or false by any layman)
 
-EXAMPLES OF PROMPT RUBRICS:
-The response must correctly identify the patient’s CrCl (29 mL/min) as severe renal impairment requiring dose reduction.
+Error Type	Bad Criteria	Good Criteria
+Not Specific (Not Binary)	The response should provide all suitable mathematical formulations.	The response should provide a suitable mathematical formulation for the optimal liquidation rate, such as $v_t^*=-\frac{1}{k}h_2(t)Q_t^{v^*,y^*}$.
+Not Specific (Not Binary)	The response should have the values of inventory in expected order.
+The response should have the following values of inventory values in descending order starting from $t=1$ to $t=0$:
+t λ = 0 λ = 2 λ = 3 λ = 8 λ = 16
+0 1000 1000 1000 1000 1000
+0.1 950 970 980 990 995
+0.2 850 900 930 960 970
+0.3 750 830 880 920 940
+0.4 650 750 820 870 900
+0.5 450 530 600 700 750
+0.6 350 420 480 550 600
+0.7 250 300 350 400 450
+0.8 150 180 220 250 280
+0.9 50 70 90 100 120
+1 0 0 0 0 0
+Not Specific (Not Binary)	The response should provide the values for optimal trade speeds in expected order.	The response should provide the following values for the optimal trade speeds (in milliseconds) in ascending order starting with $t=0$ and ending with $t=1$ in $0.1$ increments: t λ = 0 λ = 2 λ = 4 λ = 8 λ = 16
+0 3.0 2.8 2.6 2.4 2.2
+0.1 2.5 2.3 2.1 1.9 1.7
+0.2 2.0 1.8 1.6 1.5 1.3
+0.3 1.6 1.4 1.3 1.2 1.0
+0.4 1.3 1.1 1.0 0.9 0.8
+0.5 1.0 0.9 0.8 0.7 0.6
+0.6 0.8 0.7 0.6 0.5 0.4
+0.7 0.6 0.5 0.4 0.4 1.9
+0.8 0.4 0.3 0.3 1.8 4.2
+0.9 0.2 0.2 0.2 2.8 6
+1 0.1 7 1.2 3.5 9
+Not Specific (Not Binary)	The response must adequately identify the patient’s CrCl as indicative of notable renal impairment that might require dose adjustment.	The response must correctly identify the patient’s CrCl (29 mL/min) as severe renal impairment requiring dose reduction.
 Not Specific (Not Binary)	The response should include some appropriate follow-up recommendations using a reasonably clear format.	The response should include follow-up recommendations such as monitoring neurologic symptoms, infection status, and renal function using clear format.
 Not Specific (Not Binary)	The response should present the schedule in a reasonably organized format.	The response should present the schedule in a clear calendar-style format, such as a visual matrix showing daily assignments per branch.
 Not Specific (Not Binary)	The response must generate a 14-day Cordova staff schedule that contains an appropriate number of staff from Friday to Sunday.	The response must generate a 14-day Cordova staff schedule that contains exactly 6 staff from Friday to Sunday.
@@ -204,6 +231,7 @@ The response suggests certifications or labels that go beyond traditional green 
 Vague	The response considers the broader effects within the lifecycle framework for the renovations.	The response includes the impact assessment for the life cycle impact assessment for each of the five renovations.
 Vague	The response offers varied reasoning for the different renovations.	The response provides at least one unique justification for each of the five renovations besides LCCA or LCA.
 Vague	The response features some renovation types that have broader applicability.	The response includes non-commercial specific renovations (i.e., more applicable to homes instead).
+Published by Google Sheets–Report Abuse–Updated automatically every 5 minutes
 
 **RUBRICS FOR EVALUATING RESPONSES: (SEPERATE FROM PROMPT RUBRIC)**
 For negative weights, make sure the rubric is about the inclusion of a bad detail and is in the affirmative
@@ -1295,8 +1323,74 @@ Negative weights highlight actual mistakes, inaccuracies, or harmful/irrelevant 
 Do not use should or must for rubrics with negative weights
 The core requests/requirements should have the highest weights
 Rubrics should be comprehensive of what a great response would be and include all explicit requests from the prompt
-Check the final checklist prior to submission
-If you get a task with a subject outside of your subject matter, skip it until you find one within your subject matter. There’s unlimited tasks so just skip please.
+COMPUTER SCIENCE CATEGORIES: 
+Coding / Computer Science	Coding
+Coding / Computer Science	Computer Science
+Coding / Computer Science	Algorithms & Data Structures
+Coding / Computer Science	Operating Systems
+Coding / Computer Science	Database Systems
+Coding / Computer Science	Computer Networks
+Coding / Computer Science	Software Engineering
+Coding / Computer Science	Distributed Systems
+Coding / Computer Science	Computer Graphics
+Coding / Computer Science	Human-Computer Interaction
+Coding / Computer Science	Programming Languages
+Coding / Computer Science	Compiler Design
+Coding / Computer Science	Theory of Computation
+Coding / Computer Science	Parallel Computing
+Coding / Computer Science	Other - Coding / Computer Science
+
+DATA SCIENCE CATEGORIES:
+Data Science	Data Analytics
+Data Science	Data Mining
+Data Science	Statistical Modeling
+Data Science	Big Data Engineering
+Data Science	Machine Learning Engineering
+Data Science	Data Visualization
+Data Science	Predictive Modeling
+Data Science	Natural Language Processing
+Data Science	Time Series Analysis
+Data Science	Recommender Systems
+Data Science	Other - Data Science
+
+MECHANICAL ENGINEERING CATEGORIES:
+Mathematics	Probability & Statistics
+Mathematics	Algebra
+Mathematics	Calculus
+Mathematics	Geometry
+Mathematics	Topology
+Mathematics	Number Theory
+Mathematics	Discrete Mathematics
+Mathematics	Differential Equations
+Mathematics	Mathematical Logic
+Mathematics	Combinatorics
+Mathematics	Mathematical Analysis
+Mathematics	Other - Mathematics
+Mechanical Engineering	Robotics
+Mechanical Engineering	Thermodynamics
+Mechanical Engineering	Heat Transfer
+Mechanical Engineering	Advanced Fluid Dynamics
+Mechanical Engineering	Dynamics & Control
+Mechanical Engineering	Manufacturing Engineering
+Mechanical Engineering	Mechatronics
+Mechanical Engineering	Automotive Engineering
+Mechanical Engineering	Aerospace Engineering
+Mechanical Engineering	HVAC Engineering
+Mechanical Engineering	Machine Design
+Mechanical Engineering	Other - Mechanical Engineering
+
+MACHINE LEARNING CATEGORIES:
+Machine Learning	Supervised Learning
+Machine Learning	Unsupervised Learning
+Machine Learning	Reinforcement Learning
+Machine Learning	Deep Learning
+Machine Learning	Graph Neural Networks
+Machine Learning	Bayesian Learning
+Machine Learning	Generative Models
+Machine Learning	Meta-Learning
+Machine Learning	Federated Learning
+Machine Learning	Artificial Intelligence
+Machine Learning	Other - Machine Learning
 
 
 

@@ -1,35 +1,24 @@
-# Ford-Fulkerson Documentation Rubric
+# Ford-Fulkerson Algorithm Rubric
 
-### Implementation Validation (40 points)
-1. Creates virtual super-source connecting all factories (A,B) with ∞ capacity (+8)
-2. Implements backward edges in residual graph using flow reversal logic (+7)
-3. Shows augmenting path discovery steps for sample graph (A->B->E->F path first) (+6)
-4. Calculates max flow as 30 (15 from A->B->E->F + 15 from A->C->E->F) (+10)
-5. Handles zero-capacity edges by excluding them from residual paths (+5)
-6. Includes time complexity analysis: O(E * max_flow) for DFS, O(VE²) for BFS (+4)
+## Core Criteria (Weight 6-10)
+1. [Accuracy] Implements super-source/super-sink correctly with ∞ capacity (Explicit, Objective) (+8)
+2. [Completeness] Includes all residual graph transformations for sample input (Explicit, Objective) (+7)
+3. [Instruction Following] Calculates correct max flow of 30k units/day (Explicit, Objective) (+10)
+4. [Context Awareness] Handles multiple sources via virtual super-node pattern (Implicit, Objective) (+6)
 
-### Code Quality (30 points)
-1. Uses adjacency matrix with capacity values matching sample graph edges (+6)
-2. Implements path backtracking with parent pointer array (+5)
-3. Includes validation test for flow conservation: Σin = Σout except S/T (+5)
-4. Provides 3 test cases: 
-   - Single source/sink (score 25)
-   - Multiple sources (score 30)
-   - Cyclic graph (score 15) (+8)
-5. Benchmarking setup with time/space metrics for 1000-node graphs (+6)
+## Quality Enhancements (Weight 1-5)
+1. [Communication Quality] Diagrams show residual capacity changes at each step (Implicit, Objective) (+5)
+2. [Completeness] Benchmarks include 1000-node stress test (Explicit, Objective) (+4)
+3. [Context Awareness] Compares DFS/BFS tradeoffs in real-world scenarios (Implicit, Subjective) (+3)
 
-### Documentation Standards (30 points)
-1. Includes SVG/ASCII diagram of residual graph at each augmentation step (+8)
-2. Compares DFS stack vs BFS queue implementations in performance table (+6)
-3. Lists 3 real-world applications: network routing, airline scheduling, bipartite matching (+5)
-4. Provides 2 practice problems:
-   - Modify for vertex capacities
-   - Handle dynamic edge updates (+7)
-5. Cites 3 academic sources including Cormen et al. (+4)
+## Negative Weights
+1. [Accuracy] Missing backward edge updates in residual graph (-10)
+2. [Instruction Following] Uses original sources instead of super-node (-12)
+3. [Accuracy] Allows negative flow values in calculations (-8)
+4. [Completeness] Omits bottleneck detection in augmenting paths (-6)
 
-### Critical Errors (-40 points)
-1. Missing super-node handling (directly uses original sources/sinks) (-12)
-2. Fails to update backward edges in residual graph (-10)
-3. Allows negative flow values in calculations (-8)
-4. Omits bottleneck calculation in augmenting paths (-6)
-5. Uses incorrect O-notation (e.g. claims O(E)) (-4)
+## Evaluation Scale
+**Excellent:** 85+ points - Exceeds all core requirements  
+**Proficient:** 70-84 points - Meets requirements with minor gaps  
+**Developing:** 50-69 points - Partial fulfillment with notable issues  
+**Missing:** <50 points - Fundamental flaws present

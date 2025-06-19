@@ -1,8 +1,3 @@
-
-DEEPSEEK_API_KEY=sk-83fcb178c65a4d579aa744ced5b74067
-Deepseek R1 0528
-📚 Valkyrie Project Guidelines
-
 🧠 Mental Model: Write Like a Real User
 
 Knowledge Cutoff Date: The model has no knowledge of the world after January 31, 2023. Requesting information after this date is not allowed. 

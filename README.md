@@ -1,100 +1,12 @@
-# Project Setup Guide
 
-## Windows Installation
-
-### Prerequisites
-- Windows 10/11
-- Python 3.8+ (install from [python.org](https://www.python.org/downloads/windows/))
-  - Check "Add Python to PATH" during installation
-- Git for Windows (install from [git-scm.com](https://git-scm.com/download/win))
-
-### Quick Start
-1. Open Command Prompt as Administrator
-```cmd
-git clone https://github.com/your-repo/project.git
-cd project
-python -m venv venv
-venv\Scripts\activate
-pip install -r requirements.txt
-```
-
-2. Configure Environment Variables:
-```cmd
-set FLASK_APP=app.py
-set FLASK_ENV=development
-```
-
-3. Run the application:
-```cmd
-flask run
-```
-
-For troubleshooting common Windows issues:
-- If you get "script execution disabled" errors, run:
-```cmd
-Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-```
-- For SQLite database issues, ensure the db file path uses forward slashes (/) 
-
-# Project Setup Guide
-
-## Windows Installation
-
-### Prerequisites
-- Windows 10/11
-- Python 3.8+ ([Download Python](https://www.python.org/downloads/windows/))
-  - Check "Add Python to PATH" during installation
-- [Git for Windows](https://git-scm.com/download/win)
-
-### Installation Steps
-1. Clone the repository:
-```cmd
-git clone https://github.com/your-repo/project.git
-cd project
-```
-
-2. Create and activate virtual environment:
-```cmd
-python -m venv venv
-venv\Scripts\activate
-```
-
-3. Install dependencies:
-```cmd
-pip install -r requirements.txt
-```
-
-### Configuration
-Set environment variables in Command Prompt:
-```cmd
-set FLASK_APP=app.py
-set FLASK_ENV=development
-```
-
-### Running the Application
-Start the development server:
-```cmd
-flask run
-```
-
-### Troubleshooting
-Common Windows issues and solutions:
-- **Script execution disabled**: 
-```cmd
-Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-```
-- **Database path issues**: Use forward slashes (/) in paths
-- **Missing DLL errors**: Install the latest [Visual C++ Redistributable](https://aka.ms/vs/17/release/vc_redist.x64.exe)
-
+DEEPSEEK_API_KEY=sk-83fcb178c65a4d579aa744ced5b74067
+Deepseek R1 0528
 📚 Valkyrie Project Guidelines
 
 🧠 Mental Model: Write Like a Real User
 
-
 Knowledge Cutoff Date: The model has no knowledge of the world after January 31, 2023. Requesting information after this date is not allowed. 
-
 Reference Texts: Any documents you'd like to model to utilize must be copied and pasted into the Attachment tool below the prompt box. 100,000 word maximum.
-
 No General Internet Search: The model has knowledge of the world, but does not have internet access. If you’d like it to reference specific information, please provide that information as a reference text. 
 A strong prompt should sound like something you’d actually type into ChatGPT mid-task. Picture it: you’re working on something, hit a tricky spot, and ask a question to get unstuck. That’s what good prompts look like—natural, specific, and grounded in real work.
 
@@ -121,8 +33,6 @@ First Person: Prompts should be your ask, not a homework problem or interview qu
 Don’t Over-Explain: Assume the model is a capable expert. Skip step-by-step instructions for standard processes.
 
 No Single Correct Answer: Good prompts support diverse, well-reasoned outputs—not just one “right” answer. Rubrics are built to evaluate variability.
-
-https://docs.google.com/document/d/e/2PACX-1vQ6NYJWmjGl_TUFo8nJ581xZsU0sUx0bxXlL-8GU5SJWOcf6kwnNUrJP0cHbdz5EFYWHxp2YdZk01Hm/pub
 
 Natural Tone - No Personas
 

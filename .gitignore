@@ -1,0 +1,48 @@
+# System files
+NTUSER.DAT*
+ntuser.dat*
+ntuser.ini
+
+# OS folders
+AppData/
+Application Data/
+Contacts/
+Cookies/
+Favorites/
+Links/
+Local Settings/
+My Documents/
+NetHood/
+PrintHood/
+Recent/
+SendTo/
+Start Menu/
+Templates/
+Saved Games/
+Searches/
+
+# Cloud storage
+OneDrive*/
+My Drive/
+
+# Cache and temp
+.cache/
+npm-cache/
+node_modules/
+_Cleanup/
+
+# Config files
+.boto
+.gitconfig
+.gsutil/
+.local/
+.n8n/
+.pm2/
+.python_history
+.ssh/
+.vscode/
+.claude*
+
+# Misc
+,
+package-lock.json

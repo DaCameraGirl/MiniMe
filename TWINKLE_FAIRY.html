@@ -547,6 +547,30 @@ const HELP_RESPONSES = [
   "Lots! ✦ I can tell you about science, history, geography, animals, space, technology, famous people, and more. Just ask me anything — like 'what is gravity' or 'who was Shakespeare'! 🎀",
 ];
 
+function normalizeSpeak(q) {
+  return q
+    .replace(/\br\b/gi,   'are')
+    .replace(/\bu\b/gi,   'you')
+    .replace(/\bur\b/gi,  'your')
+    .replace(/\bwut\b/gi, 'what')
+    .replace(/\bwat\b/gi, 'what')
+    .replace(/\bidk\b/gi, 'I do not know')
+    .replace(/\bomg\b/gi, 'oh my god')
+    .replace(/\bbtw\b/gi, 'by the way')
+    .replace(/\blol\b/gi, '')
+    .replace(/\bhru\b/gi, 'how are you')
+    .replace(/\bwhos\b/gi,'who is')
+    .replace(/\bwhats\b/gi,'what is')
+    .replace(/\bhows\b/gi, 'how is')
+    .replace(/\bplz\b/gi, 'please')
+    .replace(/\bpls\b/gi, 'please')
+    .replace(/\bthx\b/gi, 'thanks')
+    .replace(/\btbh\b/gi, 'to be honest')
+    .replace(/\bngl\b/gi, 'not gonna lie')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 function cleanQuery(q) {
   let t = q
     .toLowerCase()
@@ -616,7 +640,9 @@ const HELP_PATTERNS = [
   /what (topics|things|subjects) do you know/i,
 ];
 
-async function answer(question) {
+async function answer(rawQuestion) {
+  const question = normalizeSpeak(rawQuestion);
+
   for (const pattern of HELP_PATTERNS) {
     if (pattern.test(question)) {
       return HELP_RESPONSES[Math.floor(Math.random() * HELP_RESPONSES.length)];
@@ -629,7 +655,7 @@ async function answer(question) {
     }
   }
 
-  const topic = cleanQuery(question);
+  const topic = cleanQuery(question); // question is already normalized
   if (!topic) return "Hmm, what would you like to know? Try asking something like 'what is the moon' or 'who was Einstein'! ✦";
 
   for (const [key, fact] of Object.entries(FACTS)) {

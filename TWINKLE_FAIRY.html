@@ -256,6 +256,122 @@
       from { width:0;    height:0;    opacity:0.9; transform:translate(-50%,-50%); }
       to   { width:90px; height:90px; opacity:0;   transform:translate(-50%,-50%); }
     }
+
+    /* ── SETUP MODAL ── */
+    #setupModal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(2,1,10,0.88);
+      backdrop-filter: blur(18px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    #setupModal.active { display: flex; }
+    .setup-card {
+      width: min(420px, 100%);
+      background: rgba(14,6,30,0.95);
+      border: 1px solid rgba(192,132,252,0.35);
+      border-radius: 28px;
+      padding: 32px 28px;
+      display: grid;
+      gap: 18px;
+      box-shadow: 0 0 80px rgba(192,132,252,0.15), 0 30px 60px rgba(0,0,0,0.5);
+      text-align: center;
+    }
+    .setup-card .s-icon { font-size: 3rem; filter: drop-shadow(0 0 14px #ff9ef0); }
+    .setup-card h2 { font-size: 1.4rem; letter-spacing:-0.03em; color:#f0e8ff; }
+    .setup-card p  { color: rgba(200,180,255,0.6); font-size:0.93rem; line-height:1.65; }
+    .setup-card p a { color:#c084fc; }
+    .setup-input {
+      width: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(192,132,252,0.35);
+      border-radius: 14px;
+      padding: 12px 16px;
+      color: #f0e8ff;
+      font: inherit;
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 0.2s;
+      text-align: center;
+      letter-spacing: 0.04em;
+    }
+    .setup-input:focus { border-color: #c084fc; }
+    .setup-input::placeholder { color: rgba(200,170,255,0.4); }
+    .setup-btn {
+      background: linear-gradient(135deg,#c084fc,#7ef0ff);
+      border: none; border-radius: 999px;
+      padding: 13px 24px;
+      color: #07020f; font: 700 1rem 'Segoe UI',sans-serif;
+      cursor: pointer; width: 100%;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .setup-btn:hover { transform:scale(1.03); box-shadow:0 0 24px rgba(192,132,252,0.45); }
+    .setup-skip { color:rgba(200,170,255,0.42); font-size:0.82rem; cursor:pointer; }
+    .setup-skip:hover { color:rgba(200,170,255,0.7); }
+
+    /* ── CODE BLOCKS ── */
+    .code-block {
+      background: rgba(0,0,0,0.45);
+      border: 1px solid rgba(192,132,252,0.22);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 8px 0;
+      font-size: 0.82rem;
+    }
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 12px;
+      background: rgba(192,132,252,0.1);
+      border-bottom: 1px solid rgba(192,132,252,0.15);
+    }
+    .code-header span { color:#c084fc; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.12em; }
+    .copy-btn {
+      background: rgba(192,132,252,0.18);
+      border: 1px solid rgba(192,132,252,0.3);
+      border-radius: 6px;
+      padding: 3px 10px;
+      color: #c084fc;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .copy-btn:hover { background: rgba(192,132,252,0.35); }
+    .code-block pre {
+      margin: 0;
+      padding: 12px;
+      overflow-x: auto;
+      white-space: pre;
+    }
+    .code-block code {
+      color: #a5f3fc;
+      font-family: 'Consolas','Courier New',monospace;
+      font-size: 0.82rem;
+      line-height: 1.55;
+    }
+    .prose-text { color:#f0e8ff; line-height:1.65; }
+    #bubble.wide { max-width: 480px; min-width: 300px; }
+
+    /* ── API KEY INDICATOR ── */
+    #keyBadge {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 6;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      border: 1px solid;
+    }
+    #keyBadge.on  { background:rgba(78,255,176,0.1); border-color:rgba(78,255,176,0.3); color:#4fffb0; }
+    #keyBadge.off { background:rgba(192,132,252,0.1); border-color:rgba(192,132,252,0.3); color:#c084fc; }
   </style>
 </head>
 <body>
@@ -280,6 +396,19 @@
 </div>
 
 <div id="hint">✦ Click Twinkle to chat &nbsp;·&nbsp; Click anywhere to call her ✦</div>
+<div id="keyBadge" class="off" title="Click to change AI key">✦ Add AI Key</div>
+
+<div id="setupModal">
+  <div class="setup-card">
+    <div class="s-icon">🧚‍♀️</div>
+    <h2>Give Twinkle a Real Brain! ✦</h2>
+    <p>Add a free <strong>Google Gemini API key</strong> and she can write full frontend, backend, and all-ends code — plus answer anything intelligently.<br><br>
+    Get a free key at <a href="https://aistudio.google.com/app/apikey" target="_blank">aistudio.google.com</a> → sign in with Google → click <strong>Get API Key</strong>. Free, no credit card.</p>
+    <input class="setup-input" id="setupKeyInput" type="password" placeholder="Paste your Gemini API key here…" autocomplete="off">
+    <button class="setup-btn" id="setupSaveBtn" type="button">✦ Power Up Twinkle ✦</button>
+    <div class="setup-skip" id="setupSkip">Skip for now — I'll use basic mode</div>
+  </div>
+</div>
 
 <script>
 // ═══════════════════════════════════════════════════
@@ -464,13 +593,51 @@ function typewrite(text, onDone) {
   })();
 }
 
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function renderContent(text) {
+  if (!text.includes('```')) return { html: escHtml(text), hasCode: false };
+  let html = '', hasCode = false;
+  text.split(/(```[\s\S]*?```)/g).forEach(part => {
+    if (part.startsWith('```')) {
+      hasCode = true;
+      const lines = part.slice(3,-3).split('\n');
+      const lang  = lines[0].trim() || 'code';
+      const code  = lines.slice(1).join('\n').trim();
+      html += `<div class="code-block"><div class="code-header"><span>${escHtml(lang)}</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div><pre><code>${escHtml(code)}</code></pre></div>`;
+    } else if (part.trim()) {
+      html += `<span class="prose-text">${escHtml(part)}</span>`;
+    }
+  });
+  return { html, hasCode };
+}
+
+window.copyCode = function(btn) {
+  const code = btn.closest('.code-block').querySelector('code').textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 2000);
+  });
+};
+
 function showBubble(text, withInput, onDone) {
   placeBubble();
   bubble.classList.remove('hidden');
   bubble.classList.add('visible');
   hint.style.visibility = 'hidden';
   inputRow.classList.toggle('hidden', !withInput);
-  typewrite(text, onDone);
+
+  const { html, hasCode } = renderContent(text);
+  if (hasCode) {
+    bubble.classList.add('wide');
+    bubText.innerHTML = html;
+    if (onDone) onDone();
+  } else {
+    bubble.classList.remove('wide');
+    typewrite(text, onDone);
+  }
 }
 
 function closeBubble() {
@@ -494,6 +661,43 @@ const GREETINGS = [
   "Oh, a visitor! ✦ I know things about planets, people, places, and pretty much everything. Ask away!",
   "Hello hello! ✦ I've been flying through libraries, oceans, and galaxies collecting knowledge just for moments like this!"
 ];
+
+// ═══════════════════════════════════════════════════
+// GEMINI AI ENGINE
+// ═══════════════════════════════════════════════════
+const KEY_STORE = 'twinkle.geminiKey';
+const GEMINI_SYSTEM = `You are Twinkle, a magical sparkly AI fairy created by @DaCameraGirl. You know everything and can write working code in any language — frontend (HTML/CSS/JS/React), backend (Python/Node/SQL), or anything else.
+Rules: Keep fact answers SHORT (2-3 sentences). For code: write it in a markdown code block with language tag, plus one sentence explanation. Be fun and sparkly. Always end with ✦ or 🎀. No bullet lists.`;
+
+function getKey()   { return localStorage.getItem(KEY_STORE); }
+function saveKey(k) { localStorage.setItem(KEY_STORE, k.trim()); updateKeyBadge(); }
+function clearKey() { localStorage.removeItem(KEY_STORE); updateKeyBadge(); }
+
+function updateKeyBadge() {
+  const b = document.getElementById('keyBadge');
+  if (getKey()) { b.textContent = '✦ AI Connected'; b.className = 'on'; }
+  else          { b.textContent = '✦ Add AI Key';   b.className = 'off'; }
+}
+
+async function callGemini(question) {
+  const key = getKey();
+  if (!key) return null;
+  try {
+    const res = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`,
+      { method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({
+          system_instruction: { parts:[{ text: GEMINI_SYSTEM }] },
+          contents: [{ parts:[{ text: question }] }],
+          generationConfig: { temperature:0.7, maxOutputTokens:700 }
+        })
+      }
+    );
+    if (res.status === 400 || res.status === 403) { clearKey(); return null; }
+    const d = await res.json();
+    return d.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || null;
+  } catch(_) { return null; }
+}
 
 // ═══════════════════════════════════════════════════
 // KNOWLEDGE ENGINE  (Wikipedia REST + fallback facts)
@@ -669,32 +873,30 @@ const HELP_PATTERNS = [
 async function answer(rawQuestion) {
   const question = normalizeSpeak(rawQuestion);
 
-  for (const pattern of CODING_PATTERNS) {
-    if (pattern.test(question)) {
-      return CODING_RESPONSES[Math.floor(Math.random() * CODING_RESPONSES.length)];
-    }
-  }
-
-  for (const pattern of CAPABILITY_PATTERNS) {
-    if (pattern.test(question)) {
-      return CAPABILITY_RESPONSES[Math.floor(Math.random() * CAPABILITY_RESPONSES.length)];
-    }
-  }
-
-  for (const pattern of HELP_PATTERNS) {
-    if (pattern.test(question)) {
-      return HELP_RESPONSES[Math.floor(Math.random() * HELP_RESPONSES.length)];
-    }
-  }
-
+  // Self-awareness always fires first (before AI)
   for (const pattern of SELF_PATTERNS) {
     if (pattern.test(question)) {
       return SELF_RESPONSES[Math.floor(Math.random() * SELF_RESPONSES.length)];
     }
   }
 
-  const topic = cleanQuery(question); // question is already normalized
-  if (!topic) return "Hmm, what would you like to know? Try asking something like 'what is the moon' or 'who was Einstein'! ✦";
+  // Try Gemini AI — handles code, facts, everything
+  const geminiReply = await callGemini(question);
+  if (geminiReply) return geminiReply;
+
+  // ── Fallback (no API key) ──
+  for (const pattern of CODING_PATTERNS) {
+    if (pattern.test(question)) return CODING_RESPONSES[Math.floor(Math.random() * CODING_RESPONSES.length)];
+  }
+  for (const pattern of CAPABILITY_PATTERNS) {
+    if (pattern.test(question)) return CAPABILITY_RESPONSES[Math.floor(Math.random() * CAPABILITY_RESPONSES.length)];
+  }
+  for (const pattern of HELP_PATTERNS) {
+    if (pattern.test(question)) return HELP_RESPONSES[Math.floor(Math.random() * HELP_RESPONSES.length)];
+  }
+
+  const topic = cleanQuery(question);
+  if (!topic) return "Hmm, what would you like to know? ✦";
 
   for (const [key, fact] of Object.entries(FACTS)) {
     if (topic.includes(key)) return fact;
@@ -703,7 +905,7 @@ async function answer(rawQuestion) {
   const wiki = await wikiSummary(topic);
   if (wiki) return wiki;
 
-  return `I fluttered all through my sparkly memory for "${topic}" but couldn't quite find it! Try rephrasing — like "what is ${topic}" — and I'll try again! ✦`;
+  return `I couldn't find "${topic}"! Add a Gemini key (click ✦ bottom-right) to unlock my full brain! 🎀`;
 }
 
 // ═══════════════════════════════════════════════════
@@ -805,13 +1007,44 @@ function loop(ts) {
 // ═══════════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════════
+// ── SETUP MODAL WIRING ──
+const setupModal   = document.getElementById('setupModal');
+const setupKeyInput= document.getElementById('setupKeyInput');
+const setupSaveBtn = document.getElementById('setupSaveBtn');
+const setupSkip    = document.getElementById('setupSkip');
+const keyBadge     = document.getElementById('keyBadge');
+
+setupSaveBtn.addEventListener('click', () => {
+  const k = setupKeyInput.value.trim();
+  if (!k) return;
+  saveKey(k);
+  setupModal.classList.remove('active');
+  burst(F.x, F.y, 22);
+  showBubble("Yesss! ✦ I have my full brain now! Ask me ANYTHING — facts, code, frontend, backend, all of it! 🎀", true, () => askInput.focus());
+  F.chatOpen = true;
+});
+
+setupSkip.addEventListener('click', () => {
+  setupModal.classList.remove('active');
+});
+
+keyBadge.addEventListener('click', () => {
+  setupKeyInput.value = getKey() || '';
+  setupModal.classList.add('active');
+});
+
+// ── INIT ──
 resizeCanvas();
 pickWaypoint();
 fairyEl.style.left = `${F.x}px`;
 fairyEl.style.top  = `${F.y}px`;
+updateKeyBadge();
 
 requestAnimationFrame(ts => { lastTs = ts; requestAnimationFrame(loop); });
-setTimeout(() => burst(F.x, F.y, 12), 600);
+setTimeout(() => {
+  burst(F.x, F.y, 12);
+  if (!getKey()) setTimeout(() => setupModal.classList.add('active'), 1800);
+}, 600);
 </script>
 </body>
 </html>

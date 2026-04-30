@@ -636,15 +636,24 @@ async function wikiSummary(topic) {
   return null;
 }
 
+const CODING_PATTERNS = [
+  /do you (code|program|speak|know) (python|javascript|html|css|java|ruby|rust|sql|react|coding|programming)/i,
+  /can you use (python|javascript|html|css|java|ruby|rust|sql|react)/i,
+  /could you use (python|javascript|html|css|java|ruby|rust|sql|react)/i,
+  /could (you |he |she )?(code|program)/i,
+  /can (you |he |she )?code/i,
+];
+
+const CODING_RESPONSES = [
+  "Oh I LOVE coding topics! ✦ I know about Python, JavaScript, HTML, CSS, Java, SQL and more — just ask me 'what is Python' or 'how does JavaScript work' and I'll tell you all about it! 🎀",
+  "Yes yes yes! ✦ Ask me about any programming language or coding concept — Python, JavaScript, HTML, CSS, React, databases… I know a lil bit about all of them! Try 'what is Python'! ✦",
+  "I know loads about coding! 🎀 I can explain programming languages, concepts, frameworks and more. Just ask 'what is HTML' or 'what is machine learning' — go ahead, test me! ✦",
+];
+
 const CAPABILITY_PATTERNS = [
   /^(can|could|do|are|would) you/i,
   /do you know how to/i,
   /are you able to/i,
-  /can you (code|program|build|make|create|write|draw|sing|dance|speak|translate|calculate|solve|hack|design)/i,
-  /could you (code|program|build|make|create|write|draw|sing|dance|speak|translate|calculate|solve|hack|design)/i,
-  /do you (code|program|speak|know) (python|javascript|html|css|java|ruby|rust|sql|react|coding|programming)/i,
-  /can you use (python|javascript|html|css|java|ruby|rust|sql|react)/i,
-  /could you use (python|javascript|html|css|java|ruby|rust|sql|react)/i,
 ];
 
 const HELP_PATTERNS = [
@@ -659,6 +668,12 @@ const HELP_PATTERNS = [
 
 async function answer(rawQuestion) {
   const question = normalizeSpeak(rawQuestion);
+
+  for (const pattern of CODING_PATTERNS) {
+    if (pattern.test(question)) {
+      return CODING_RESPONSES[Math.floor(Math.random() * CODING_RESPONSES.length)];
+    }
+  }
 
   for (const pattern of CAPABILITY_PATTERNS) {
     if (pattern.test(question)) {

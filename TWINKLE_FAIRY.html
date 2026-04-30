@@ -55,6 +55,7 @@
       flex-direction: column;
       align-items: center;
       gap: 0;
+      padding: 22px;
     }
 
     .fairy-bow {
@@ -372,14 +373,16 @@ const F = {
   waypointTimer: 0,
   waypointMs:    2600,
   chatOpen:      false,
-  facingLeft:    false
+  facingLeft:    false,
+  mouseX:        -999,
+  mouseY:        -999
 };
 
 function pickWaypoint() {
-  const m = 110;
+  const m = 130;
   F.tx = m + Math.random() * (window.innerWidth  - m * 2);
   F.ty = m + Math.random() * (window.innerHeight - m * 2);
-  F.waypointMs   = 4000 + Math.random() * 5000;
+  F.waypointMs    = 7000 + Math.random() * 8000;
   F.waypointTimer = 0;
 }
 
@@ -389,7 +392,11 @@ function moveFairy(dt) {
   const dx = F.tx - F.x;
   const dy = F.ty - F.y;
   const dist = Math.hypot(dx, dy);
-  const sp = dist > 180 ? 0.022 : 0.013;
+
+  // slow way down when mouse is nearby so she's catchable
+  const mouseDist = Math.hypot(F.mouseX - F.x, F.mouseY - F.y);
+  const nearMouse = mouseDist < 140;
+  const sp = nearMouse ? 0.003 : (dist > 180 ? 0.007 : 0.004);
 
   F.x += dx * sp;
   F.y += dy * sp;
@@ -651,6 +658,8 @@ async function handleAsk() {
 // ═══════════════════════════════════════════════════
 // EVENTS
 // ═══════════════════════════════════════════════════
+document.addEventListener('mousemove', e => { F.mouseX = e.clientX; F.mouseY = e.clientY; });
+
 fairyEl.addEventListener('click', e => { e.stopPropagation(); openChat(); });
 
 fairyEl.addEventListener('mouseenter', () => {

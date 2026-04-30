@@ -1,24 +1,3 @@
-[submodule "rubric-creator"]
-	path = rubric-creator
-	url = https://github.com/thegraidenetwork/rubric-creator
-[submodule "create-rubric-app"]
-	path = create-rubric-app
-	url = https://github.com/RubricLab/create-rubric-app
-[submodule "ai-rubric-generator"]
-	path = ai-rubric-generator
-	url = https://github.com/hamisbela/ai-rubric-generator
-[submodule "ZemDocs"]
-	path = ZemDocs
-	url = https://github.com/Zemerik/ZemDocs
-[submodule "Typescript-advance"]
-	path = Typescript-advance
-	url = https://github.com/virajpwdn/Typescript-advance
-[submodule "JAVA"]
-	path = JAVA
-	url = https://github.com/suryadwd/JAVA
-[submodule "ui-gen"]
-	path = ui-gen
-	url = https://github.com/yousseftastift/ui-gen
 [submodule "STT-Wizard"]
 	path = STT-Wizard
 	url = https://github.com/Scikous/STT-Wizard
@@ -28,33 +7,3 @@
 [submodule "LLM-Wizard"]
 	path = LLM-Wizard
 	url = https://github.com/Scikous/LLM-Wizard
-[submodule "opyrator"]
-	path = opyrator
-	url = https://github.com/ml-tooling/opyrator
-[submodule "cs-field-guide"]
-	path = cs-field-guide
-	url = https://github.com/uccser/cs-field-guide
-[submodule "Neura-AI"]
-	path = Neura-AI
-	url = https://github.com/joshivanhilario/Neura-AI
-[submodule "live-wallpaper"]
-	path = live-wallpaper
-	url = https://github.com/jhgdfuygfdukbyihs/live-wallpaper
-[submodule "Gemini-Chatbot-Interface-with-Streamlit"]
-	path = Gemini-Chatbot-Interface-with-Streamlit
-	url = https://github.com/ilhansevval/Gemini-Chatbot-Interface-with-Streamlit
-[submodule "yew"]
-	path = yew
-	url = https://github.com/yewstack/yew
-[submodule "easydiffusion"]
-	path = easydiffusion
-	url = https://github.com/easydiffusion/easydiffusion
-[submodule "nicegui"]
-	path = nicegui
-	url = https://github.com/zauberzeug/nicegui
-[submodule "lvgl"]
-	path = lvgl
-	url = https://github.com/lvgl/lvgl
-[submodule "MLDebugging"]
-	path = MLDebugging
-	url = https://github.com/hjyTsuki/MLDebugging

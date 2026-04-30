@@ -526,6 +526,13 @@ const SELF_PATTERNS = [
   /are you (a|an) (fairy|ai|bot|robot)/i,
   /where (do you|did you) come from/i,
   /how (old|smart) are you/i,
+  /what can you (do|help|tell|say)/i,
+  /what do you (do|know|say)/i,
+  /what are you (good at|able to|capable of)/i,
+  /can you help/i,
+  /^help$/i,
+  /how do you work/i,
+  /what (topics|things|subjects) do you know/i,
 ];
 
 const SELF_RESPONSES = [
@@ -534,10 +541,16 @@ const SELF_RESPONSES = [
   "Oh that's me! I'm Twinkle ✦, a glowing AI fairy created by @DaCameraGirl. I live in your browser and I know things about science, history, art, space, animals… pretty much everything! 🎀",
 ];
 
+const HELP_RESPONSES = [
+  "Ooh so much! ✦ Ask me about science, history, animals, space, music, art, food, countries, famous people, inventions… pretty much anything! Try: 'what is a black hole' or 'who was Cleopatra'! 🎀",
+  "I know a lil bit about everything! ✦ Try asking things like: 'what is DNA', 'who invented the telephone', 'what is the capital of Japan', 'how do volcanoes work'… I'll do my best! ✦",
+  "Lots! ✦ I can tell you about science, history, geography, animals, space, technology, famous people, and more. Just ask me anything — like 'what is gravity' or 'who was Shakespeare'! 🎀",
+];
+
 function cleanQuery(q) {
   let t = q
     .toLowerCase()
-    .replace(/^(what is|what are|who is|who was|who made|who built|who created|tell me about|explain|how does|why is|where is|when was|what was|what do you know about|i want to know about)\s+/i, '')
+    .replace(/^(what is|what are|what was|what were|who is|who was|who made|who built|who created|tell me about|explain|how does|how did|how do|why is|why does|where is|when was|what do you know about|i want to know about|can you tell me about)\s+/i, '')
     .replace(/[?!.,;]+$/, '')
     .replace(/^the\s+/i, '')
     .trim();
@@ -593,7 +606,23 @@ async function wikiSummary(topic) {
   return null;
 }
 
+const HELP_PATTERNS = [
+  /what can you (do|help|tell|say)/i,
+  /what do you (do|know|say)/i,
+  /what are you (good at|able to|capable of)/i,
+  /can you help/i,
+  /^help$/i,
+  /how do you work/i,
+  /what (topics|things|subjects) do you know/i,
+];
+
 async function answer(question) {
+  for (const pattern of HELP_PATTERNS) {
+    if (pattern.test(question)) {
+      return HELP_RESPONSES[Math.floor(Math.random() * HELP_RESPONSES.length)];
+    }
+  }
+
   for (const pattern of SELF_PATTERNS) {
     if (pattern.test(question)) {
       return SELF_RESPONSES[Math.floor(Math.random() * SELF_RESPONSES.length)];

@@ -379,7 +379,7 @@ function pickWaypoint() {
   const m = 110;
   F.tx = m + Math.random() * (window.innerWidth  - m * 2);
   F.ty = m + Math.random() * (window.innerHeight - m * 2);
-  F.waypointMs   = 1800 + Math.random() * 3200;
+  F.waypointMs   = 4000 + Math.random() * 5000;
   F.waypointTimer = 0;
 }
 
@@ -389,7 +389,7 @@ function moveFairy(dt) {
   const dx = F.tx - F.x;
   const dy = F.ty - F.y;
   const dist = Math.hypot(dx, dy);
-  const sp = dist > 180 ? 0.058 : 0.036;
+  const sp = dist > 180 ? 0.022 : 0.013;
 
   F.x += dx * sp;
   F.y += dy * sp;
@@ -528,11 +528,19 @@ const SELF_RESPONSES = [
 ];
 
 function cleanQuery(q) {
-  return q
+  let t = q
     .toLowerCase()
     .replace(/^(what is|what are|who is|who was|who made|who built|who created|tell me about|explain|how does|why is|where is|when was|what was|what do you know about|i want to know about)\s+/i, '')
     .replace(/[?!.,;]+$/, '')
+    .replace(/^the\s+/i, '')
     .trim();
+
+  // "president of X" → "President of X" so Wikipedia finds the office article
+  t = t.replace(/^(president|prime minister|king|queen|leader|capital|population|flag|currency)\s+of\s+/i, (_, role) => {
+    return role.charAt(0).toUpperCase() + role.slice(1) + ' of ';
+  });
+
+  return t;
 }
 
 async function wikiSummary(topic) {

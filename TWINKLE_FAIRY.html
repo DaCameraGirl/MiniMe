@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Twinkle ✦ Your Fairy of Everything</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: radial-gradient(ellipse at 18% 28%, #1e0842 0%, #0a0218 45%, #00050f 100%);
+      cursor: crosshair;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      user-select: none;
+    }
+
+    #starCanvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ── SPARKLES ── */
+    #sparkleLayer {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .sparkle {
+      position: fixed;
+      pointer-events: none;
+      animation: sparkleFade var(--dur, 1.1s) ease-out forwards;
+      will-change: transform, opacity;
+      line-height: 1;
+    }
+
+    @keyframes sparkleFade {
+      0%   { opacity: 1; transform: scale(1.1) rotate(0deg) translateY(0); }
+      100% { opacity: 0; transform: scale(0.1) rotate(var(--spin,180deg)) translateY(var(--drift,-36px)); }
+    }
+
+    /* ── FAIRY ── */
+    #fairy {
+      position: fixed;
+      z-index: 10;
+      cursor: pointer;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .fairy-wand {
+      font-size: 1.1rem;
+      animation: wandTwinkle 0.75s ease-in-out infinite alternate;
+      filter: drop-shadow(0 0 7px #ffc857) drop-shadow(0 0 14px #ffd700);
+      margin-bottom: -6px;
+      z-index: 11;
+      position: relative;
+    }
+
+    @keyframes wandTwinkle {
+      from { opacity: 0.65; transform: scale(0.85) rotate(-12deg); }
+      to   { opacity: 1;    transform: scale(1.25) rotate(12deg); }
+    }
+
+    .fairy-body {
+      font-size: 3.2rem;
+      line-height: 1;
+      filter: drop-shadow(0 0 12px #ff9ef0) drop-shadow(0 0 26px #c084fc);
+      animation: fairyFloat 3.6s ease-in-out infinite, fairyWiggle 1.9s ease-in-out infinite;
+      position: relative;
+      z-index: 11;
+      transition: filter 0.3s ease;
+    }
+
+    @keyframes fairyFloat  {
+      0%,100% { transform: translateY(0px);  }
+      50%     { transform: translateY(-10px); }
+    }
+    @keyframes fairyWiggle {
+      0%,100% { rotate: -4deg; }
+      50%     { rotate:  4deg; }
+    }
+
+    .fairy-body.thinking {
+      animation: fairyThink 0.38s ease-in-out infinite !important;
+    }
+    @keyframes fairyThink {
+      0%,100% { transform: scale(1);    filter: drop-shadow(0 0 12px #7ef0ff) drop-shadow(0 0 30px #7ef0ff); }
+      50%     { transform: scale(1.18); filter: drop-shadow(0 0 22px #fff)    drop-shadow(0 0 50px #7ef0ff) drop-shadow(0 0 80px #c084fc); }
+    }
+
+    #fairy:hover .fairy-body {
+      filter: drop-shadow(0 0 20px #ff9ef0) drop-shadow(0 0 40px #7ef0ff) drop-shadow(0 0 70px #ffc857);
+    }
+
+    /* mood tints */
+    #fairy.mood-happy   .fairy-body { filter: drop-shadow(0 0 16px #ffc857) drop-shadow(0 0 34px #ff9ef0); }
+    #fairy.mood-wise    .fairy-body { filter: drop-shadow(0 0 16px #7ef0ff) drop-shadow(0 0 34px #c084fc); }
+    #fairy.mood-excited .fairy-body { filter: drop-shadow(0 0 18px #ff5ea8) drop-shadow(0 0 40px #ffc857) drop-shadow(0 0 60px #ff5ea8); }
+
+    /* ── BUBBLE ── */
+    #bubble {
+      position: fixed;
+      z-index: 20;
+      max-width: 310px;
+      min-width: 210px;
+      background: rgba(12, 5, 28, 0.9);
+      border: 1px solid rgba(192, 132, 252, 0.38);
+      border-radius: 22px 22px 22px 6px;
+      padding: 16px 18px 14px;
+      backdrop-filter: blur(22px);
+      box-shadow:
+        0 0 0 1px rgba(126, 240, 255, 0.08),
+        0 10px 40px rgba(0,0,0,0.5),
+        0 0 50px rgba(192,132,252,0.12);
+      transform: translate(-50%, -100%) scale(1);
+      transition:
+        opacity 0.28s ease,
+        transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    #bubble.hidden {
+      opacity: 0;
+      transform: translate(-50%, -92%) scale(0.88);
+      pointer-events: none;
+    }
+    #bubble.visible { pointer-events: auto; }
+
+    .bubble-tail {
+      position: absolute;
+      bottom: -9px;
+      left: 22px;
+      width: 17px;
+      height: 17px;
+      background: rgba(12, 5, 28, 0.9);
+      border-right: 1px solid rgba(192,132,252,0.38);
+      border-bottom: 1px solid rgba(192,132,252,0.38);
+      clip-path: polygon(0 0, 100% 100%, 100% 0);
+      transform: rotate(45deg);
+    }
+
+    .bubble-name {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #c084fc;
+      margin-bottom: 7px;
+    }
+
+    #bubbleText {
+      color: #f0e8ff;
+      font-size: 0.97rem;
+      line-height: 1.65;
+      min-height: 22px;
+    }
+
+    .typing-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      background: #c084fc;
+      margin-left: 2px;
+      vertical-align: text-bottom;
+      animation: blink 0.65s step-end infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
+
+    #inputRow {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      border-top: 1px solid rgba(192,132,252,0.2);
+      padding-top: 10px;
+    }
+    #inputRow.hidden { display: none; }
+
+    #askInput {
+      flex: 1;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(192,132,252,0.3);
+      border-radius: 13px;
+      padding: 8px 12px;
+      color: #f0e8ff;
+      font: inherit;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    #askInput:focus {
+      border-color: #c084fc;
+      box-shadow: 0 0 12px rgba(192,132,252,0.25);
+    }
+    #askInput::placeholder { color: rgba(200,170,255,0.42); }
+
+    #askBtn {
+      background: linear-gradient(135deg, #c084fc, #7ef0ff);
+      border: none;
+      border-radius: 13px;
+      padding: 8px 14px;
+      cursor: pointer;
+      color: #08020f;
+      font-size: 1.05rem;
+      font-weight: 700;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    #askBtn:hover { transform: scale(1.1); box-shadow: 0 0 20px rgba(192,132,252,0.55); }
+
+    /* ── HINT ── */
+    #hint {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(192,150,255,0.52);
+      font-size: 0.86rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      z-index: 5;
+      animation: hintPulse 2.6s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes hintPulse { 0%,100%{opacity:0.38;} 50%{opacity:0.9;} }
+
+    /* ── RIPPLE ── */
+    .ripple {
+      position: fixed;
+      border-radius: 50%;
+      border: 1.5px solid rgba(192,132,252,0.45);
+      pointer-events: none;
+      z-index: 1;
+      animation: rippleOut 0.85s ease-out forwards;
+    }
+    @keyframes rippleOut {
+      from { width:0;    height:0;    opacity:0.9; transform:translate(-50%,-50%); }
+      to   { width:90px; height:90px; opacity:0;   transform:translate(-50%,-50%); }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="starCanvas"></canvas>
+<div id="sparkleLayer"></div>
+
+<div id="fairy">
+  <div class="fairy-wand">✦</div>
+  <div class="fairy-body">🧚‍♀️</div>
+</div>
+
+<div id="bubble" class="hidden">
+  <div class="bubble-tail"></div>
+  <div class="bubble-name">✦ Twinkle</div>
+  <div id="bubbleText"></div>
+  <div id="inputRow" class="hidden">
+    <input id="askInput" type="text" placeholder="Ask me anything…" maxlength="130" autocomplete="off">
+    <button id="askBtn" type="button">✦</button>
+  </div>
+</div>
+
+<div id="hint">✦ Click Twinkle to chat &nbsp;·&nbsp; Click anywhere to call her ✦</div>
+
+<script>
+// ═══════════════════════════════════════════════════
+// STAR FIELD CANVAS
+// ═══════════════════════════════════════════════════
+const canvas = document.getElementById('starCanvas');
+const ctx    = canvas.getContext('2d');
+let stars    = [];
+let starTick = 0;
+
+function resizeCanvas() {
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+  buildStars();
+}
+
+function buildStars() {
+  stars = [];
+  const n = Math.floor((canvas.width * canvas.height) / 3800);
+  const palette = ['#ffffff','#c084fc','#7ef0ff','#ffc857','#ff9ef0'];
+  for (let i = 0; i < n; i++) {
+    stars.push({
+      x:     Math.random() * canvas.width,
+      y:     Math.random() * canvas.height,
+      r:     Math.random() * 1.5 + 0.2,
+      base:  Math.random(),
+      speed: Math.random() * 0.007 + 0.002,
+      phase: Math.random() * Math.PI * 2,
+      color: palette[Math.floor(Math.random() * palette.length)]
+    });
+  }
+}
+
+function drawStars() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  starTick += 0.016;
+  stars.forEach(s => {
+    const a = 0.35 + 0.65 * Math.abs(Math.sin(starTick * s.speed * 55 + s.phase));
+    ctx.globalAlpha = a * s.base;
+    ctx.fillStyle   = s.color;
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  ctx.globalAlpha = 1;
+}
+
+// ═══════════════════════════════════════════════════
+// SPARKLE PARTICLE SYSTEM
+// ═══════════════════════════════════════════════════
+const sparkleLayer = document.getElementById('sparkleLayer');
+const SPARKS  = ['✦','✷','◆','⋆','✸','∗','✺','·'];
+const SCOLORS = ['#ffc857','#ff9ef0','#7ef0ff','#c084fc','#ff5ea8','#fff','#a5f3fc'];
+
+function createSparkle(x, y, burst) {
+  const el  = document.createElement('span');
+  el.className  = 'sparkle';
+  el.textContent = SPARKS[Math.floor(Math.random() * SPARKS.length)];
+  const spread = burst ? 55 : 22;
+  el.style.left  = `${x + (Math.random() - 0.5) * spread}px`;
+  el.style.top   = `${y + (Math.random() - 0.5) * spread}px`;
+  el.style.color = SCOLORS[Math.floor(Math.random() * SCOLORS.length)];
+  const dur = burst ? 0.55 + Math.random() * 0.85 : 0.75 + Math.random() * 0.65;
+  el.style.setProperty('--dur',   `${dur}s`);
+  el.style.setProperty('--spin',  `${Math.random()>0.5?'':'-'}${160+Math.random()*200}deg`);
+  el.style.setProperty('--drift', `${-18 - Math.random()*44}px`);
+  el.style.fontSize    = `${burst ? 0.8+Math.random()*0.9 : 0.45+Math.random()*0.55}rem`;
+  el.style.textShadow  = '0 0 8px currentColor, 0 0 18px currentColor';
+  sparkleLayer.appendChild(el);
+  setTimeout(() => el.remove(), dur * 1000 + 50);
+}
+
+function burst(x, y, n = 14) {
+  for (let i = 0; i < n; i++) {
+    setTimeout(() => createSparkle(x, y, true), i * 38);
+  }
+}
+
+// ═══════════════════════════════════════════════════
+// FAIRY MOVEMENT
+// ═══════════════════════════════════════════════════
+const fairyEl   = document.getElementById('fairy');
+const fairyBody = fairyEl.querySelector('.fairy-body');
+
+const F = {
+  x: window.innerWidth  / 2,
+  y: window.innerHeight / 2,
+  tx: window.innerWidth  / 2,
+  ty: window.innerHeight / 2,
+  sparkTimer:    0,
+  waypointTimer: 0,
+  waypointMs:    2600,
+  chatOpen:      false,
+  facingLeft:    false
+};
+
+function pickWaypoint() {
+  const m = 110;
+  F.tx = m + Math.random() * (window.innerWidth  - m * 2);
+  F.ty = m + Math.random() * (window.innerHeight - m * 2);
+  F.waypointMs   = 1800 + Math.random() * 3200;
+  F.waypointTimer = 0;
+}
+
+function moveFairy(dt) {
+  if (F.chatOpen) return;
+
+  const dx = F.tx - F.x;
+  const dy = F.ty - F.y;
+  const dist = Math.hypot(dx, dy);
+  const sp = dist > 180 ? 0.058 : 0.036;
+
+  F.x += dx * sp;
+  F.y += dy * sp;
+
+  // face direction
+  const nowLeft = dx < -6;
+  if (nowLeft !== F.facingLeft) {
+    F.facingLeft = nowLeft;
+    fairyBody.style.transform = nowLeft ? 'scaleX(-1)' : 'scaleX(1)';
+  }
+
+  fairyEl.style.left = `${F.x}px`;
+  fairyEl.style.top  = `${F.y}px`;
+
+  // sparkle trail
+  F.sparkTimer += dt;
+  if (F.sparkTimer > 130 && dist > 12) {
+    F.sparkTimer = 0;
+    createSparkle(F.x, F.y, false);
+  }
+
+  // new waypoint
+  F.waypointTimer += dt;
+  if (F.waypointTimer > F.waypointMs || dist < 28) pickWaypoint();
+}
+
+// ═══════════════════════════════════════════════════
+// SPEECH BUBBLE
+// ═══════════════════════════════════════════════════
+const bubble   = document.getElementById('bubble');
+const bubText  = document.getElementById('bubbleText');
+const inputRow = document.getElementById('inputRow');
+const askInput = document.getElementById('askInput');
+const askBtn   = document.getElementById('askBtn');
+const hint     = document.getElementById('hint');
+
+let typeTimer = null;
+
+function placeBubble() {
+  const bw = 310;
+  const margin = 18;
+  let bx = F.x;
+  let by = F.y - 75;
+
+  bx = Math.max(margin + bw/2, Math.min(window.innerWidth - margin - bw/2, bx));
+  by = Math.max(margin + 90, by);
+
+  bubble.style.left = `${bx}px`;
+  bubble.style.top  = `${by}px`;
+}
+
+function typewrite(text, onDone) {
+  clearTimeout(typeTimer);
+  bubText.innerHTML = '';
+  let i = 0;
+  (function tick() {
+    if (i < text.length) {
+      bubText.innerHTML = text.slice(0, i+1) + '<span class="typing-cursor"></span>';
+      i++;
+      typeTimer = setTimeout(tick, 20);
+    } else {
+      bubText.textContent = text;
+      if (onDone) onDone();
+    }
+  })();
+}
+
+function showBubble(text, withInput, onDone) {
+  placeBubble();
+  bubble.classList.remove('hidden');
+  bubble.classList.add('visible');
+  hint.style.visibility = 'hidden';
+  inputRow.classList.toggle('hidden', !withInput);
+  typewrite(text, onDone);
+}
+
+function closeBubble() {
+  bubble.classList.add('hidden');
+  bubble.classList.remove('visible');
+  clearTimeout(typeTimer);
+  F.chatOpen = false;
+  fairyEl.className = '';
+  hint.style.visibility = '';
+  pickWaypoint();
+}
+
+// ═══════════════════════════════════════════════════
+// GREETINGS
+// ═══════════════════════════════════════════════════
+const GREETINGS = [
+  "Oh hi! ✦ I'm Twinkle — I know a lil bit about everything in the whole wide world! What are you curious about?",
+  "You found me! ✦ Ask me anything — science, history, space, animals, art, music, you name it!",
+  "Eep! You clicked me! ✦ I was just fluttering through the universe collecting knowledge. What do you want to know?",
+  "Hiii! ✦ I'm full of sparkly facts. Ask me about anything and I'll fly through my memory for you!",
+  "Oh, a visitor! ✦ I know things about planets, people, places, and pretty much everything. Ask away!",
+  "Hello hello! ✦ I've been flying through libraries, oceans, and galaxies collecting knowledge just for moments like this!"
+];
+
+// ═══════════════════════════════════════════════════
+// KNOWLEDGE ENGINE  (Wikipedia REST + fallback facts)
+// ═══════════════════════════════════════════════════
+const FACTS = {
+  moon:    "The Moon is Earth's only natural satellite, about 384,400 km away! Its gravity is what causes our ocean tides. ✦",
+  sun:     "The Sun is a star 4.6 billion years old that makes up 99.8% of our solar system's mass. It'll shine for another 5 billion years! ✦",
+  water:   "Water covers 71% of Earth's surface! Each molecule is two hydrogen atoms bonded to one oxygen atom — that tiny H₂O runs all life on Earth. ✦",
+  space:   "Space is almost completely empty! The nearest star, Proxima Centauri, is 4.24 light-years away — roughly 40 trillion kilometres. ✦",
+  earth:   "Earth is about 4.5 billion years old and the only known planet with life! Its core is iron and nickel, hotter than the Sun's surface. ✦",
+  cats:    "Cats sleep 12–16 hours a day and can make over 100 different sounds. They use their whiskers to sense air currents! ✦",
+  dogs:    "Dogs have been human companions for ~15,000 years and can understand up to 250 words and gestures. Their nose prints are unique like fingerprints! ✦",
+  music:   "Music activates more areas of the brain simultaneously than almost any other activity. It reduces anxiety and can actually improve memory! ✦",
+  love:    "Love activates the brain's reward system, flooding it with dopamine and oxytocin. Scientists say it feels neurologically similar to winning a prize! ✦",
+  time:    "Time actually moves slightly faster at higher altitudes because gravity is weaker there — GPS satellites have to correct for this every day! ✦",
+  ocean:   "The ocean covers over 70% of Earth and we've only explored about 20% of it! The deepest point, Mariana Trench, is nearly 11 km deep. ✦",
+  brain:   "Your brain has about 86 billion neurons, each connected to thousands of others. It uses about 20% of your body's energy despite being only 2% of your weight! ✦",
+  dna:     "DNA is coiled so tightly that if you stretched out all the DNA in just one human cell, it would be about 2 metres long! ✦",
+  light:   "Light travels at 299,792 km per second — so fast that sunlight takes only 8 minutes to reach Earth from 150 million km away. ✦",
+  volcano: "There are about 1,500 potentially active volcanoes on Earth. The largest in the solar system is Olympus Mons on Mars — three times taller than Everest! ✦",
+};
+
+function cleanQuery(q) {
+  return q
+    .toLowerCase()
+    .replace(/^(what is|what are|who is|who was|tell me about|explain|how does|why is|where is|when was|what was|what do you know about|i want to know about)\s+/i, '')
+    .replace(/[?!.,;]+$/, '')
+    .trim();
+}
+
+async function wikiSummary(topic) {
+  const enc = encodeURIComponent(topic);
+  try {
+    const r = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${enc}`, { headers: { Accept: 'application/json' } });
+    if (r.ok) {
+      const d = await r.json();
+      if (d.extract && d.extract.length > 25) {
+        let t = d.extract;
+        if (t.length > 250) {
+          const cut = t.indexOf('. ', 110);
+          t = cut > 0 ? t.slice(0, cut + 1) : t.slice(0, 235) + '…';
+        }
+        return t + ' ✦';
+      }
+    }
+  } catch (_) {}
+
+  // fallback: wikipedia search
+  try {
+    const sr = await fetch(`https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${enc}&format=json&origin=*&srlimit=1`);
+    if (sr.ok) {
+      const sd = await sr.json();
+      const hit = sd?.query?.search?.[0];
+      if (hit) {
+        const r2 = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(hit.title)}`);
+        if (r2.ok) {
+          const d2 = await r2.json();
+          if (d2.extract && d2.extract.length > 25) {
+            let t = d2.extract;
+            if (t.length > 250) {
+              const cut = t.indexOf('. ', 110);
+              t = cut > 0 ? t.slice(0, cut + 1) : t.slice(0, 235) + '…';
+            }
+            return t + ' ✦';
+          }
+        }
+      }
+    }
+  } catch (_) {}
+
+  return null;
+}
+
+async function answer(question) {
+  const topic = cleanQuery(question);
+  if (!topic) return "Hmm, what would you like to know? Try asking something like 'what is the moon' or 'who was Einstein'! ✦";
+
+  for (const [key, fact] of Object.entries(FACTS)) {
+    if (topic.includes(key)) return fact;
+  }
+
+  const wiki = await wikiSummary(topic);
+  if (wiki) return wiki;
+
+  return `I fluttered all through my sparkly memory for "${topic}" but couldn't quite find it! Try rephrasing — like "what is ${topic}" — and I'll try again! ✦`;
+}
+
+// ═══════════════════════════════════════════════════
+// INTERACTION
+// ═══════════════════════════════════════════════════
+function openChat() {
+  if (F.chatOpen) { closeBubble(); return; }
+
+  F.chatOpen = true;
+  F.tx = F.x; F.ty = F.y;
+
+  burst(F.x, F.y, 18);
+  fairyEl.classList.add('mood-happy');
+
+  const g = GREETINGS[Math.floor(Math.random() * GREETINGS.length)];
+  showBubble(g, true, () => askInput.focus());
+}
+
+async function handleAsk() {
+  const q = askInput.value.trim();
+  if (!q) return;
+
+  askInput.value = '';
+  inputRow.classList.add('hidden');
+  fairyEl.className = '';
+  fairyEl.classList.add('mood-wise');
+  fairyBody.classList.add('thinking');
+
+  burst(F.x, F.y, 8);
+  showBubble('Hmm, let me flutter through my knowledge… ✦', false);
+
+  const reply = await answer(q);
+
+  fairyBody.classList.remove('thinking');
+  fairyEl.className = '';
+  fairyEl.classList.add('mood-excited');
+  burst(F.x, F.y, 16);
+
+  showBubble(reply, true, () => {
+    askInput.focus();
+    setTimeout(() => { fairyEl.classList.remove('mood-excited'); }, 1400);
+  });
+}
+
+// ═══════════════════════════════════════════════════
+// EVENTS
+// ═══════════════════════════════════════════════════
+fairyEl.addEventListener('click', e => { e.stopPropagation(); openChat(); });
+
+fairyEl.addEventListener('mouseenter', () => {
+  if (!F.chatOpen) burst(F.x, F.y, 7);
+});
+
+document.body.addEventListener('click', e => {
+  if (F.chatOpen) { closeBubble(); return; }
+
+  F.tx = e.clientX;
+  F.ty = e.clientY;
+  F.waypointTimer = 0;
+
+  const r = document.createElement('div');
+  r.className = 'ripple';
+  r.style.left = `${e.clientX}px`;
+  r.style.top  = `${e.clientY}px`;
+  document.body.appendChild(r);
+  setTimeout(() => r.remove(), 900);
+
+  burst(e.clientX, e.clientY, 5);
+});
+
+askBtn.addEventListener('click',   e => { e.stopPropagation(); handleAsk(); });
+askInput.addEventListener('keydown', e => { if (e.key === 'Enter') handleAsk(); e.stopPropagation(); });
+askInput.addEventListener('click',   e => e.stopPropagation());
+bubble.addEventListener('click',     e => e.stopPropagation());
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeBubble(); });
+
+window.addEventListener('resize', () => {
+  resizeCanvas();
+  if (F.chatOpen) placeBubble();
+});
+
+// ═══════════════════════════════════════════════════
+// MAIN LOOP
+// ═══════════════════════════════════════════════════
+let lastTs = 0;
+
+function loop(ts) {
+  const dt = Math.min(ts - lastTs, 50);
+  lastTs = ts;
+  drawStars();
+  moveFairy(dt);
+  if (F.chatOpen) placeBubble();
+  requestAnimationFrame(loop);
+}
+
+// ═══════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════
+resizeCanvas();
+pickWaypoint();
+fairyEl.style.left = `${F.x}px`;
+fairyEl.style.top  = `${F.y}px`;
+
+requestAnimationFrame(ts => { lastTs = ts; requestAnimationFrame(loop); });
+setTimeout(() => burst(F.x, F.y, 12), 600);
+</script>
+</body>
+</html>

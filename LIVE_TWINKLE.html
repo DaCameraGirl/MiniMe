@@ -1,0 +1,2351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>International Jewelry Box</title>
+
+    <link rel="manifest" href="manifest.json">
+    <meta id="themeColorMeta" name="theme-color" content="#0d1024">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Jewelry Box">
+    <link rel="apple-touch-icon" href="icon-192.png">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Syne:wght@600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+KR:wght@400;700&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans+Arabic:wght@400;700&family=Noto+Sans+Hebrew:wght@400;700&family=Noto+Sans+Thai:wght@400;700&family=Noto+Sans+Devanagari:wght@400;700&display=swap');
+
+        :root {
+            --bg-1: #090b16;
+            --bg-2: #12081d;
+            --bg-3: #251037;
+            --text: #f6f3ff;
+            --muted: #b8b1d8;
+            --surface: rgba(255, 255, 255, 0.08);
+            --surface-strong: rgba(255, 255, 255, 0.12);
+            --surface-soft: rgba(255, 255, 255, 0.05);
+            --stroke: rgba(255, 255, 255, 0.12);
+            --stroke-strong: rgba(255, 255, 255, 0.2);
+            --shadow: rgba(0, 0, 0, 0.28);
+            --accent: #7ef0ff;
+            --accent-2: #ff5ea8;
+            --accent-3: #ffc857;
+            --button-text: #08101a;
+            --good: #88f0b5;
+            --warn: #ffcf5b;
+            --danger: #ff8aa5;
+            --theme-chip: #0d1024;
+            --page-grid: rgba(255, 255, 255, 0.045);
+        }
+
+        :root[data-theme="aurora"] {
+            --bg-1: #03131b;
+            --bg-2: #08261f;
+            --bg-3: #11343a;
+            --text: #effdfa;
+            --muted: #b3e4dc;
+            --surface: rgba(255, 255, 255, 0.07);
+            --surface-strong: rgba(255, 255, 255, 0.12);
+            --surface-soft: rgba(255, 255, 255, 0.04);
+            --stroke: rgba(164, 255, 233, 0.16);
+            --stroke-strong: rgba(164, 255, 233, 0.26);
+            --shadow: rgba(0, 0, 0, 0.24);
+            --accent: #78ffe1;
+            --accent-2: #2cc2ff;
+            --accent-3: #ffd166;
+            --button-text: #021316;
+            --good: #8ff6bc;
+            --warn: #ffd166;
+            --danger: #ffb28f;
+            --theme-chip: #061e22;
+            --page-grid: rgba(164, 255, 233, 0.05);
+        }
+
+        :root[data-theme="daylight"] {
+            --bg-1: #fef7f1;
+            --bg-2: #f4f7ff;
+            --bg-3: #e8f1ff;
+            --text: #1c1a2e;
+            --muted: #6b6687;
+            --surface: rgba(255, 255, 255, 0.72);
+            --surface-strong: rgba(255, 255, 255, 0.9);
+            --surface-soft: rgba(28, 26, 46, 0.04);
+            --stroke: rgba(88, 92, 130, 0.14);
+            --stroke-strong: rgba(88, 92, 130, 0.22);
+            --shadow: rgba(96, 120, 160, 0.18);
+            --accent: #008bd1;
+            --accent-2: #ff477e;
+            --accent-3: #ffb347;
+            --button-text: #fffaf4;
+            --good: #1d8a53;
+            --warn: #b96a00;
+            --danger: #be2d63;
+            --theme-chip: #ffffff;
+            --page-grid: rgba(42, 48, 86, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            color: var(--text);
+            font-family: 'Space Grotesk', 'Noto Sans', sans-serif;
+            background:
+                radial-gradient(circle at 12% 16%, rgba(255, 94, 168, 0.22), transparent 28%),
+                radial-gradient(circle at 84% 12%, rgba(126, 240, 255, 0.18), transparent 30%),
+                radial-gradient(circle at 52% 88%, rgba(255, 200, 87, 0.16), transparent 32%),
+                linear-gradient(145deg, var(--bg-1), var(--bg-2) 52%, var(--bg-3));
+            overflow-x: hidden;
+            position: relative;
+            padding: 30px 18px 56px;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(var(--page-grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--page-grid) 1px, transparent 1px);
+            background-size: 46px 46px;
+            mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7), transparent 88%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            width: 42vw;
+            height: 42vw;
+            right: -10vw;
+            top: -12vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(126, 240, 255, 0.18), transparent 70%);
+            filter: blur(30px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .gem {
+            position: fixed;
+            z-index: 0;
+            font-size: clamp(1.1rem, 2vw, 1.7rem);
+            color: var(--accent);
+            text-shadow: 0 0 18px currentColor, 0 0 32px currentColor;
+            opacity: 0.6;
+            pointer-events: none;
+            animation: floatGem linear infinite;
+        }
+
+        @keyframes floatGem {
+            0% {
+                transform: translateY(120vh) rotate(0deg) scale(0.7);
+                opacity: 0;
+            }
+            12% {
+                opacity: 0.58;
+            }
+            88% {
+                opacity: 0.58;
+            }
+            100% {
+                transform: translateY(-120vh) rotate(480deg) scale(1);
+                opacity: 0;
+            }
+        }
+
+        .app-shell {
+            width: min(1220px, 100%);
+            margin: 0 auto;
+            display: grid;
+            gap: 28px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .topbar {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+            gap: 24px;
+            align-items: start;
+        }
+
+        .brand {
+            display: grid;
+            gap: 10px;
+            padding-top: 6px;
+        }
+
+        .eyebrow {
+            font-size: 0.82rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .brand h1 {
+            font-family: 'Syne', 'Space Grotesk', sans-serif;
+            font-size: clamp(2.55rem, 6vw, 5rem);
+            line-height: 0.92;
+            letter-spacing: -0.05em;
+            max-width: 7.5ch;
+        }
+
+        .brand p {
+            max-width: 40rem;
+            font-size: 1.04rem;
+            line-height: 1.75;
+            color: var(--muted);
+        }
+
+        .top-stack {
+            display: grid;
+            gap: 14px;
+            justify-items: end;
+        }
+
+        .top-card {
+            width: min(100%, 420px);
+            background: var(--surface);
+            border: 1px solid var(--stroke);
+            border-radius: 26px 40px 28px 34px;
+            backdrop-filter: blur(18px);
+            box-shadow: 0 26px 54px var(--shadow);
+            padding: 18px;
+            display: grid;
+            gap: 14px;
+        }
+
+        .top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .mini-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--muted);
+        }
+
+        .top-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .studio {
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 26%),
+                rgba(9, 10, 18, 0.28);
+            border: 1px solid var(--stroke);
+            border-radius: 38px 54px 42px 48px;
+            backdrop-filter: blur(22px);
+            box-shadow: 0 32px 80px var(--shadow);
+            padding: 22px;
+            display: grid;
+            gap: 22px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .studio::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 18% 18%, rgba(255, 94, 168, 0.16), transparent 24%),
+                radial-gradient(circle at 78% 26%, rgba(126, 240, 255, 0.13), transparent 25%);
+            pointer-events: none;
+        }
+
+        .utility-ribbon {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto auto auto;
+            gap: 12px;
+            align-items: end;
+        }
+
+        .field {
+            display: grid;
+            gap: 8px;
+            min-width: 0;
+        }
+
+        .field span {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--muted);
+        }
+
+        select,
+        textarea,
+        .translation-output,
+        button {
+            font: inherit;
+        }
+
+        select,
+        textarea,
+        .translation-output {
+            width: 100%;
+            background: var(--surface-soft);
+            color: var(--text);
+            border: 1px solid var(--stroke);
+        }
+
+        select {
+            appearance: none;
+            padding: 15px 18px;
+            border-radius: 20px;
+            outline: none;
+            background-image:
+                linear-gradient(45deg, transparent 50%, var(--accent) 50%),
+                linear-gradient(135deg, var(--accent) 50%, transparent 50%);
+            background-repeat: no-repeat;
+            background-size: 8px 8px, 8px 8px;
+            background-position:
+                calc(100% - 22px) calc(50% - 3px),
+                calc(100% - 16px) calc(50% - 3px);
+            cursor: pointer;
+            transition: border-color 0.18s ease, transform 0.18s ease, background-color 0.18s ease;
+        }
+
+        select:hover,
+        select:focus,
+        textarea:focus,
+        .translation-output:focus-within {
+            border-color: var(--stroke-strong);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 320px;
+            padding: 22px 24px;
+            border-radius: 30px 42px 30px 36px;
+            outline: none;
+            line-height: 1.74;
+            font-size: 1.12rem;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        textarea::placeholder {
+            color: var(--muted);
+            opacity: 0.74;
+        }
+
+        .translation-stage {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 120px minmax(0, 0.92fr);
+            gap: 18px;
+            align-items: stretch;
+        }
+
+        .pane {
+            background: var(--surface);
+            border: 1px solid var(--stroke);
+            box-shadow: 0 20px 54px rgba(0, 0, 0, 0.18);
+            padding: 20px;
+            display: grid;
+            gap: 16px;
+            min-width: 0;
+        }
+
+        .input-pane {
+            border-radius: 34px 50px 34px 48px;
+        }
+
+        .output-pane {
+            border-radius: 50px 34px 48px 34px;
+        }
+
+        .pane-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .pane-head h2 {
+            font-family: 'Syne', 'Space Grotesk', sans-serif;
+            font-size: 1.75rem;
+            letter-spacing: -0.04em;
+        }
+
+        .pane-kicker {
+            display: grid;
+            gap: 6px;
+        }
+
+        .pane-kicker span {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: var(--muted);
+        }
+
+        .pane-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .text-surface,
+        .translation-output {
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+        }
+
+        .translation-output {
+            min-height: 320px;
+            padding: 24px;
+            border-radius: 42px 30px 36px 30px;
+            line-height: 1.72;
+            font-size: 1.12rem;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        .translation-output.is-empty::before {
+            content: attr(data-placeholder);
+            color: var(--muted);
+            opacity: 0.78;
+        }
+
+        .translation-output.flash {
+            animation: targetGlow 0.6s ease;
+        }
+
+        @keyframes targetGlow {
+            0% {
+                transform: translateY(4px) scale(0.99);
+            }
+            50% {
+                transform: translateY(0) scale(1);
+                box-shadow: 0 0 0 1px var(--stroke), 0 0 28px rgba(126, 240, 255, 0.14);
+            }
+            100% {
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes wordTwinkle {
+            0%   { opacity: 0; transform: scale(0.6) translateY(8px); text-shadow: 0 0 18px var(--accent), 0 0 40px var(--accent-2); filter: blur(4px); }
+            28%  { opacity: 1; transform: scale(1.18) translateY(-3px); text-shadow: 0 0 28px var(--accent), 0 0 60px var(--accent-2), 0 0 90px var(--accent-3); filter: blur(0); }
+            52%  { opacity: 0.82; transform: scale(0.95) translateY(1px); text-shadow: 0 0 10px var(--accent); }
+            72%  { opacity: 1; transform: scale(1.06) translateY(-1px); text-shadow: 0 0 22px var(--accent-2), 0 0 44px var(--accent); }
+            88%  { opacity: 1; transform: scale(0.99); text-shadow: 0 0 6px var(--accent); }
+            100% { opacity: 1; transform: scale(1) translateY(0); text-shadow: none; }
+        }
+
+        .twinkle-word {
+            display: inline;
+            opacity: 0;
+            animation: wordTwinkle 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            will-change: transform, opacity, filter;
+        }
+
+        .bridge {
+            display: grid;
+            place-items: center;
+            align-content: center;
+            gap: 14px;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        .bridge-line {
+            width: 2px;
+            min-height: 120px;
+            background: linear-gradient(180deg, transparent, var(--accent), transparent);
+            position: relative;
+        }
+
+        .bridge-line::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 8px;
+            transform: translateX(-50%) rotate(45deg);
+            width: 14px;
+            height: 14px;
+            border-right: 2px solid var(--accent);
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .bridge-badge {
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: rgba(126, 240, 255, 0.12);
+            border: 1px solid rgba(126, 240, 255, 0.2);
+            color: var(--accent);
+            font-size: 0.82rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        .bridge-note {
+            max-width: 11rem;
+            font-size: 0.9rem;
+            line-height: 1.55;
+        }
+
+        .pane-foot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            font-size: 0.94rem;
+            color: var(--muted);
+        }
+
+        .status-marquee {
+            position: relative;
+            z-index: 1;
+            padding: 15px 18px;
+            border-radius: 20px 28px 24px 20px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--stroke);
+            color: var(--text);
+            font-size: 0.97rem;
+        }
+
+        button {
+            border: none;
+            border-radius: 999px;
+            padding: 13px 16px;
+            cursor: pointer;
+            transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease, background-color 0.18s ease;
+        }
+
+        button:hover:not(:disabled) {
+            transform: translateY(-1px);
+        }
+
+        button:disabled {
+            opacity: 0.48;
+            cursor: not-allowed;
+        }
+
+        button.primary,
+        button:not(.secondary):not(.ghost):not(.warning) {
+            background: linear-gradient(135deg, var(--accent-2), var(--accent));
+            color: var(--button-text);
+            box-shadow: 0 16px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        button.secondary {
+            background: var(--surface-strong);
+            color: var(--text);
+            border: 1px solid var(--stroke);
+        }
+
+        button.ghost {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--stroke);
+        }
+
+        button.warning {
+            background: linear-gradient(135deg, var(--accent-3), var(--accent-2));
+            color: var(--button-text);
+            box-shadow: 0 16px 30px rgba(0, 0, 0, 0.18);
+        }
+
+        button.active {
+            box-shadow: 0 0 0 2px rgba(126, 240, 255, 0.24), 0 18px 34px rgba(0, 0, 0, 0.2);
+        }
+
+        button[hidden] {
+            display: none !important;
+        }
+
+        .swap-btn {
+            width: 54px;
+            height: 54px;
+            padding: 0;
+            border-radius: 50%;
+            align-self: center;
+            justify-self: center;
+            font-size: 1.15rem;
+        }
+
+        .toggle {
+            align-self: center;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 16px;
+            border-radius: 999px;
+            border: 1px solid var(--stroke);
+            background: var(--surface-soft);
+            color: var(--text);
+            min-height: 52px;
+        }
+
+        .toggle input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent-2);
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 44px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: var(--theme-chip);
+            border: 1px solid var(--stroke);
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .pill.offline {
+            color: var(--warn);
+            border-color: rgba(255, 207, 91, 0.26);
+        }
+
+        .library {
+            display: grid;
+            gap: 18px;
+        }
+
+        .library-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .library-copy {
+            display: grid;
+            gap: 8px;
+        }
+
+        .library-copy h2 {
+            font-family: 'Syne', 'Space Grotesk', sans-serif;
+            font-size: clamp(1.9rem, 4vw, 2.7rem);
+            letter-spacing: -0.05em;
+        }
+
+        .library-copy p {
+            color: var(--muted);
+            font-size: 1rem;
+            line-height: 1.65;
+            max-width: 38rem;
+        }
+
+        .library-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .library-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .stream {
+            background: var(--surface);
+            border: 1px solid var(--stroke);
+            border-radius: 28px 40px 30px 36px;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 24px 56px rgba(0, 0, 0, 0.16);
+            padding: 18px;
+            display: grid;
+            gap: 14px;
+            min-width: 0;
+        }
+
+        .stream-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .stream-head h3 {
+            font-family: 'Syne', 'Space Grotesk', sans-serif;
+            font-size: 1.35rem;
+            letter-spacing: -0.04em;
+        }
+
+        .stream-head p {
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        .collection-list {
+            display: grid;
+            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+
+        .collection-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--stroke);
+            border-radius: 22px 28px 22px 26px;
+            padding: 16px;
+            display: grid;
+            gap: 10px;
+            min-width: 0;
+        }
+
+        .collection-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            font-size: 0.84rem;
+            color: var(--muted);
+        }
+
+        .collection-route {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .collection-preview {
+            display: grid;
+            gap: 6px;
+            min-width: 0;
+        }
+
+        .collection-source,
+        .collection-target {
+            overflow-wrap: anywhere;
+            line-height: 1.52;
+        }
+
+        .collection-source {
+            color: var(--muted);
+        }
+
+        .collection-target {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .collection-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .collection-actions button {
+            padding: 10px 14px;
+            font-size: 0.92rem;
+        }
+
+        .empty-message {
+            padding: 18px;
+            border-radius: 20px;
+            border: 1px dashed var(--stroke-strong);
+            color: var(--muted);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .info-row {
+            color: var(--muted);
+            font-size: 0.94rem;
+            line-height: 1.7;
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .info-row strong {
+            color: var(--text);
+        }
+
+        .popup {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(4, 5, 9, 0.76);
+            backdrop-filter: blur(12px);
+            z-index: 8;
+        }
+
+        .popup.active {
+            display: flex;
+        }
+
+        .popup-card {
+            width: min(420px, 100%);
+            background: var(--surface-strong);
+            border: 1px solid var(--stroke);
+            border-radius: 28px 38px 30px 36px;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.24);
+            padding: 24px;
+            display: grid;
+            gap: 18px;
+            text-align: center;
+            position: relative;
+        }
+
+        .popup-card h2 {
+            font-family: 'Syne', 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: -0.03em;
+        }
+
+        .popup-card p {
+            color: var(--muted);
+        }
+
+        .popup-card img {
+            width: min(300px, 100%);
+            margin: 0 auto;
+            border-radius: 22px;
+            border: 1px solid var(--stroke);
+            background: #ffffff;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            border-radius: 50%;
+        }
+
+        .rtl {
+            direction: rtl;
+            text-align: right;
+        }
+
+        .ltr {
+            direction: ltr;
+            text-align: left;
+        }
+
+        .font-default {
+            font-family: 'Space Grotesk', 'Noto Sans', sans-serif;
+            font-size: 1.12rem;
+            font-weight: 500;
+        }
+
+        .font-latin,
+        .font-cyrillic,
+        .font-greek {
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 1.12rem;
+            font-weight: 600;
+        }
+
+        .font-arabic {
+            font-family: 'Noto Sans Arabic', sans-serif;
+            font-size: 1.24rem;
+            font-weight: 700;
+        }
+
+        .font-hebrew {
+            font-family: 'Noto Sans Hebrew', sans-serif;
+            font-size: 1.16rem;
+            font-weight: 700;
+        }
+
+        .font-japanese {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 1.08rem;
+            font-weight: 700;
+        }
+
+        .font-korean {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 1.08rem;
+            font-weight: 700;
+        }
+
+        .font-chinese {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 1.08rem;
+            font-weight: 700;
+        }
+
+        .font-thai {
+            font-family: 'Noto Sans Thai', sans-serif;
+            font-size: 1.18rem;
+            font-weight: 700;
+        }
+
+        .font-hindi {
+            font-family: 'Noto Sans Devanagari', sans-serif;
+            font-size: 1.18rem;
+            font-weight: 700;
+        }
+
+        @media (max-width: 1100px) {
+            .topbar,
+            .translation-stage,
+            .library-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .top-stack {
+                justify-items: stretch;
+            }
+
+            .top-card {
+                width: 100%;
+            }
+
+            .utility-ribbon {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .swap-btn {
+                justify-self: start;
+            }
+
+            .bridge {
+                grid-template-columns: auto 1fr;
+                gap: 16px;
+                text-align: left;
+                align-items: center;
+                justify-content: start;
+            }
+
+            .bridge-line {
+                min-height: 66px;
+            }
+        }
+
+        @media (max-width: 720px) {
+            body {
+                padding: 18px 14px 42px;
+            }
+
+            .brand h1 {
+                max-width: none;
+            }
+
+            .top-actions,
+            .library-actions,
+            .pane-actions {
+                justify-content: flex-start;
+            }
+
+            .studio,
+            .stream,
+            .top-card {
+                border-radius: 28px;
+                padding: 16px;
+            }
+
+            .input-pane,
+            .output-pane,
+            textarea,
+            .translation-output {
+                border-radius: 26px;
+            }
+
+            .utility-ribbon {
+                grid-template-columns: 1fr;
+            }
+
+            textarea,
+            .translation-output {
+                min-height: 230px;
+                padding: 18px;
+            }
+
+            .pane-foot,
+            .collection-meta,
+            .info-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .collection-list {
+                grid-template-columns: 1fr;
+            }
+
+            .pane-actions button,
+            .library-actions button,
+            .top-actions button {
+                flex: 1 1 140px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gem" style="left: 8%; animation-delay: 0s; animation-duration: 14s; color: var(--accent-2);">✦</div>
+    <div class="gem" style="left: 22%; animation-delay: 3.1s; animation-duration: 12s; color: var(--accent);">◆</div>
+    <div class="gem" style="left: 39%; animation-delay: 1.4s; animation-duration: 15s; color: var(--accent-3);">✷</div>
+    <div class="gem" style="left: 68%; animation-delay: 4.2s; animation-duration: 13s; color: var(--accent);">✦</div>
+    <div class="gem" style="left: 86%; animation-delay: 2.2s; animation-duration: 16s; color: var(--accent-2);">◆</div>
+
+    <main class="app-shell">
+        <header class="topbar">
+            <div class="brand">
+                <span class="eyebrow">International Jewelry Box</span>
+                <h1>Translate fast. Keep the sparkle.</h1>
+                <p>A cleaner translation stage with speech, saved phrases, and live updates after a short pause. The app shell still works offline, and new translations resume as soon as your connection comes back.</p>
+            </div>
+
+            <div class="top-stack">
+                <div class="top-card">
+                    <div class="top-row">
+                        <div>
+                            <div class="mini-label">Theme</div>
+                            <div>Choose the room lighting.</div>
+                        </div>
+                        <span id="offlineBadge" class="pill" aria-live="polite">Checking connection...</span>
+                    </div>
+
+                    <label class="field" for="themeSelect">
+                        <span>Appearance</span>
+                        <select id="themeSelect" aria-label="Theme">
+                            <option value="midnight">Midnight Neon</option>
+                            <option value="aurora">Aurora Circuit</option>
+                            <option value="daylight">Daylight Prism</option>
+                        </select>
+                    </label>
+
+                    <div class="top-actions">
+                        <button id="installBtn" class="ghost" type="button" hidden>Install App</button>
+                        <button id="qrBtn" class="ghost" type="button">Share</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="studio" aria-label="Translation studio">
+            <div class="utility-ribbon">
+                <label class="field" for="sourceLang">
+                    <span>From</span>
+                    <select id="sourceLang" aria-label="Source language">
+                        <option value="auto">Auto-detect</option>
+                        <option value="en">English</option>
+                        <option value="es">Spanish</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="it">Italian</option>
+                        <option value="pt">Portuguese</option>
+                        <option value="ru">Russian</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="zh">Chinese</option>
+                        <option value="ar">Arabic</option>
+                        <option value="el">Greek</option>
+                        <option value="hi">Hindi</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                        <option value="th">Thai</option>
+                        <option value="pl">Polish</option>
+                        <option value="nl">Dutch</option>
+                        <option value="sv">Swedish</option>
+                        <option value="he">Hebrew</option>
+                        <option value="id">Indonesian</option>
+                        <option value="uk">Ukrainian</option>
+                        <option value="cs">Czech</option>
+                        <option value="ro">Romanian</option>
+                        <option value="hu">Hungarian</option>
+                        <option value="tl">Filipino</option>
+                    </select>
+                </label>
+
+                <button class="swap-btn" id="swapBtn" type="button" title="Swap languages" aria-label="Swap languages">⇄</button>
+
+                <label class="field" for="targetLang">
+                    <span>To</span>
+                    <select id="targetLang" aria-label="Target language">
+                        <option value="en">English</option>
+                        <option value="es">Spanish</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="it">Italian</option>
+                        <option value="pt">Portuguese</option>
+                        <option value="ru">Russian</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="zh">Chinese</option>
+                        <option value="ar">Arabic</option>
+                        <option value="el">Greek</option>
+                        <option value="hi">Hindi</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                        <option value="th">Thai</option>
+                        <option value="pl">Polish</option>
+                        <option value="nl">Dutch</option>
+                        <option value="sv">Swedish</option>
+                        <option value="he">Hebrew</option>
+                        <option value="id">Indonesian</option>
+                        <option value="uk">Ukrainian</option>
+                        <option value="cs">Czech</option>
+                        <option value="ro">Romanian</option>
+                        <option value="hu">Hungarian</option>
+                        <option value="tl">Filipino</option>
+                    </select>
+                </label>
+
+                <button id="voiceBtn" class="ghost" type="button">Voice Input</button>
+                <button id="testBtn" class="warning" type="button">Sample Text</button>
+                <button id="clearBtn" class="secondary" type="button">Reset</button>
+            </div>
+
+            <div class="translation-stage">
+                <article class="pane input-pane">
+                    <div class="pane-head">
+                        <div class="pane-kicker">
+                            <span>Source</span>
+                            <h2>Say it</h2>
+                        </div>
+                        <div class="pane-actions">
+                            <label class="toggle" for="autoPronounceToggle">
+                                <input id="autoPronounceToggle" type="checkbox">
+                                Auto-pronounce
+                            </label>
+                            <button id="speakSourceBtn" class="ghost" type="button">Listen</button>
+                        </div>
+                    </div>
+
+                    <textarea
+                        id="sourceText"
+                        class="text-surface font-default ltr"
+                        spellcheck="false"
+                        autocorrect="off"
+                        autocapitalize="off"
+                        placeholder="Type here or tap voice input..."
+                    ></textarea>
+
+                    <div class="pane-foot">
+                        <span id="sourceStats">0 characters • 0 words</span>
+                        <span>Live translation after a 0.9 second pause</span>
+                    </div>
+                </article>
+
+                <div class="bridge">
+                    <div class="bridge-line"></div>
+                    <div class="bridge-badge">Live</div>
+                    <div id="translationMeta" class="bridge-note">Ready for live translation</div>
+                </div>
+
+                <article class="pane output-pane">
+                    <div class="pane-head">
+                        <div class="pane-kicker">
+                            <span>Translation</span>
+                            <h2>Hear it</h2>
+                        </div>
+                        <div class="pane-actions">
+                            <button id="copyBtn" class="ghost" type="button">Copy</button>
+                            <button id="speakTargetBtn" class="ghost" type="button">Listen</button>
+                            <button id="favoriteBtn" type="button">Save</button>
+                        </div>
+                    </div>
+
+                    <div
+                        id="targetText"
+                        class="translation-output is-empty font-default ltr"
+                        role="status"
+                        aria-live="polite"
+                        data-placeholder="Your translation will appear here."
+                    ></div>
+
+                    <div class="pane-foot">
+                        <span id="targetStats">0 characters • 0 words</span>
+                        <span>Copy it, speak it, or save it for later.</span>
+                    </div>
+                </article>
+            </div>
+
+            <div id="status" class="status-marquee" aria-live="polite">Ready. Type or speak to start translating.</div>
+        </section>
+
+        <section class="library">
+            <div class="library-head">
+                <div class="library-copy">
+                    <span class="eyebrow">Saved Locally</span>
+                    <h2>Your phrase shelf</h2>
+                    <p>Recent translations and favorites stay on this device, so quick repeats feel instant even when the network does not.</p>
+                </div>
+
+                <div class="library-actions">
+                    <button id="clearHistoryBtn" class="ghost" type="button">Clear Recent</button>
+                    <button id="clearFavoritesBtn" class="ghost" type="button">Clear Favorites</button>
+                </div>
+            </div>
+
+            <div class="library-grid">
+                <section class="stream">
+                    <div class="stream-head">
+                        <h3>Recent</h3>
+                        <p>Stored on this device</p>
+                    </div>
+                    <div id="historyList" class="collection-list"></div>
+                </section>
+
+                <section class="stream">
+                    <div class="stream-head">
+                        <h3>Favorites</h3>
+                        <p>Reusable phrasebook</p>
+                    </div>
+                    <div id="favoritesList" class="collection-list"></div>
+                </section>
+            </div>
+        </section>
+
+        <div class="info-row">
+            <span><strong>Shortcuts:</strong> Ctrl/Cmd + Enter translates immediately. Escape closes the QR modal.</span>
+            <span><strong>Browser APIs:</strong> voice input and speech playback vary by device and browser.</span>
+        </div>
+    </main>
+
+    <div class="popup" id="qrPopup" aria-hidden="true">
+        <div class="popup-card">
+            <button id="qrClose" class="popup-close ghost" type="button" aria-label="Close QR code">&times;</button>
+            <h2>Open The Jewelry Box Somewhere Else</h2>
+            <img id="qrImage" alt="QR code for the current app URL">
+            <p>Scan this code to open the same translator on another device.</p>
+        </div>
+    </div>
+
+    <script>
+        const source = document.getElementById('sourceText');
+        const target = document.getElementById('targetText');
+        const sourceLang = document.getElementById('sourceLang');
+        const targetLang = document.getElementById('targetLang');
+        const themeSelect = document.getElementById('themeSelect');
+        const swapBtn = document.getElementById('swapBtn');
+        const testBtn = document.getElementById('testBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const voiceBtn = document.getElementById('voiceBtn');
+        const speakSourceBtn = document.getElementById('speakSourceBtn');
+        const speakTargetBtn = document.getElementById('speakTargetBtn');
+        const copyBtn = document.getElementById('copyBtn');
+        const favoriteBtn = document.getElementById('favoriteBtn');
+        const autoPronounceToggle = document.getElementById('autoPronounceToggle');
+        const status = document.getElementById('status');
+        const sourceStats = document.getElementById('sourceStats');
+        const targetStats = document.getElementById('targetStats');
+        const translationMeta = document.getElementById('translationMeta');
+        const offlineBadge = document.getElementById('offlineBadge');
+        const historyList = document.getElementById('historyList');
+        const favoritesList = document.getElementById('favoritesList');
+        const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+        const clearFavoritesBtn = document.getElementById('clearFavoritesBtn');
+        const installBtn = document.getElementById('installBtn');
+        const qrBtn = document.getElementById('qrBtn');
+        const qrPopup = document.getElementById('qrPopup');
+        const qrClose = document.getElementById('qrClose');
+        const qrImage = document.getElementById('qrImage');
+        const themeColorMeta = document.getElementById('themeColorMeta');
+
+        const WAIT_TIME = 900;
+        const MAX_HISTORY = 20;
+        const MAX_FAVORITES = 20;
+        const STORAGE_KEYS = {
+            history: 'jewelryBox.history',
+            favorites: 'jewelryBox.favorites',
+            theme: 'jewelryBox.theme',
+            autoPronounce: 'jewelryBox.autoPronounce'
+        };
+        const THEME_COLORS = {
+            midnight: '#0d1024',
+            aurora: '#061e22',
+            daylight: '#ffffff'
+        };
+        const fontMapping = {
+            auto: 'font-default',
+            en: 'font-default',
+            es: 'font-latin',
+            fr: 'font-latin',
+            de: 'font-latin',
+            it: 'font-latin',
+            pt: 'font-latin',
+            ru: 'font-cyrillic',
+            ja: 'font-japanese',
+            ko: 'font-korean',
+            zh: 'font-chinese',
+            ar: 'font-arabic',
+            el: 'font-greek',
+            hi: 'font-hindi',
+            tr: 'font-latin',
+            vi: 'font-latin',
+            th: 'font-thai',
+            pl: 'font-latin',
+            nl: 'font-latin',
+            sv: 'font-latin',
+            he: 'font-hebrew',
+            id: 'font-latin',
+            uk: 'font-cyrillic',
+            cs: 'font-latin',
+            ro: 'font-latin',
+            hu: 'font-latin',
+            tl: 'font-latin'
+        };
+        const rtlLanguages = ['ar', 'he'];
+        const speechLangMapping = {
+            en: 'en-US',
+            es: 'es-ES',
+            fr: 'fr-FR',
+            de: 'de-DE',
+            it: 'it-IT',
+            pt: 'pt-PT',
+            ru: 'ru-RU',
+            ja: 'ja-JP',
+            ko: 'ko-KR',
+            zh: 'zh-CN',
+            ar: 'ar-SA',
+            el: 'el-GR',
+            hi: 'hi-IN',
+            tr: 'tr-TR',
+            vi: 'vi-VN',
+            th: 'th-TH',
+            pl: 'pl-PL',
+            nl: 'nl-NL',
+            sv: 'sv-SE',
+            he: 'he-IL',
+            id: 'id-ID',
+            uk: 'uk-UA',
+            cs: 'cs-CZ',
+            ro: 'ro-RO',
+            hu: 'hu-HU',
+            tl: 'fil-PH'
+        };
+        const testPhrases = {
+            en: 'Hey, how are you doing today? This is a test sentence in English.',
+            es: 'Hola, ¿como estas hoy? Este es un ejemplo de texto en espanol.',
+            fr: 'Bonjour, comment ca va aujourd\'hui ? Ceci est un exemple de texte en francais.',
+            de: 'Hallo, wie geht es dir heute? Dies ist ein Beispieltext auf Deutsch.',
+            it: 'Ciao, come stai oggi? Questo e un esempio di testo in italiano.',
+            pt: 'Ola, como voce esta hoje? Este e um exemplo de texto em portugues.',
+            ru: 'Привет! Как ты сегодня? Это пример текста на русском языке.',
+            ja: 'こんにちは。今日は元気ですか？ これは日本語の例文です。',
+            ko: '안녕하세요. 오늘 기분이 어떠세요? 이것은 한국어 예문입니다.',
+            zh: '你好！你今天怎么样？这是一个中文示例。',
+            ar: 'مرحبا! كيف حالك اليوم؟ هذا مثال على نص باللغة العربية.',
+            el: 'Γεια σου! Πώς είσαι σήμερα; Αυτό είναι ένα παράδειγμα κειμένου στα ελληνικά.',
+            hi: 'नमस्ते! आप आज कैसे हैं? यह हिंदी पाठ का एक उदाहरण है।',
+            tr: 'Merhaba! Bugün nasılsın? Bu Türkçe bir örnek metindir.',
+            vi: 'Xin chao! Hom nay ban the nao? Day la mot vi du ve van ban tieng Viet.',
+            th: 'สวัสดี! วันนี้คุณเป็นอย่างไรบ้าง? นี่คือตัวอย่างข้อความภาษาไทย',
+            pl: 'Czesc! Jak sie masz dzisiaj? To jest przyklad tekstu po polsku.',
+            nl: 'Hallo! Hoe gaat het vandaag? Dit is een voorbeeld van tekst in het Nederlands.',
+            sv: 'Hej! Hur mar du idag? Det har ar ett exempel pa text pa svenska.',
+            he: 'שלום! מה שלומך היום? זו דוגמה לטקסט בעברית.',
+            id: 'Halo! Apa kabar hari ini? Ini adalah contoh teks dalam bahasa Indonesia.',
+            uk: 'Привіт! Як ти сьогодні? Це приклад тексту українською мовою.',
+            cs: 'Ahoj! Jak se dnes mas? Toto je ukazka textu v cestine.',
+            ro: 'Salut! Ce mai faci astazi? Acesta este un exemplu de text in romana.',
+            hu: 'Szia! Hogy vagy ma? Ez egy magyar nyelvu szovegpélda.',
+            tl: 'Kumusta! Kamusta ka ngayon? Ito ay isang halimbawang teksto sa Filipino.'
+        };
+
+        let translationTimer = null;
+        let translationJobId = 0;
+        let deferredPrompt = null;
+        let recognition = null;
+        let isRecognizing = false;
+        let historyEntries = [];
+        let favoriteEntries = [];
+        let lastTranslation = null;
+
+        function createId() {
+            if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+                return window.crypto.randomUUID();
+            }
+
+            return `entry-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+        }
+
+        function safeRead(key, fallback) {
+            try {
+                const value = window.localStorage.getItem(key);
+                return value ? JSON.parse(value) : fallback;
+            } catch (error) {
+                return fallback;
+            }
+        }
+
+        function safeWrite(key, value) {
+            try {
+                window.localStorage.setItem(key, JSON.stringify(value));
+            } catch (error) {
+                console.warn('Storage write failed:', error);
+            }
+        }
+
+        function safeWriteString(key, value) {
+            try {
+                window.localStorage.setItem(key, value);
+            } catch (error) {
+                console.warn('Storage write failed:', error);
+            }
+        }
+
+        function safeReadString(key, fallback) {
+            try {
+                const value = window.localStorage.getItem(key);
+                return value === null ? fallback : value;
+            } catch (error) {
+                return fallback;
+            }
+        }
+
+        function truncateText(text, limit) {
+            return text.length <= limit ? text : `${text.slice(0, limit - 1)}…`;
+        }
+
+        function countWords(text) {
+            const trimmed = text.trim();
+            return trimmed ? trimmed.split(/\s+/u).length : 0;
+        }
+
+        function getLanguageName(selectElement, value) {
+            const option = Array.from(selectElement.options).find(item => item.value === value);
+            return option ? option.textContent : value.toUpperCase();
+        }
+
+        function buildTranslationKey(entry) {
+            return [
+                entry.sourceLang,
+                entry.targetLang,
+                entry.sourceText,
+                entry.targetText
+            ].join('|||');
+        }
+
+        function normalizeEntry(entry) {
+            if (!entry || typeof entry !== 'object') {
+                return null;
+            }
+
+            const normalized = {
+                id: entry.id || createId(),
+                sourceText: typeof entry.sourceText === 'string' ? entry.sourceText : '',
+                targetText: typeof entry.targetText === 'string' ? entry.targetText : '',
+                sourceLang: typeof entry.sourceLang === 'string' ? entry.sourceLang : 'auto',
+                targetLang: typeof entry.targetLang === 'string' ? entry.targetLang : 'en',
+                createdAt: Number(entry.createdAt) || Date.now()
+            };
+
+            normalized.key = buildTranslationKey(normalized);
+            return normalized;
+        }
+
+        function detectDisplayLanguage(text) {
+            if (/[\u0590-\u05FF]/u.test(text)) {
+                return 'he';
+            }
+
+            if (/[\u0600-\u06FF]/u.test(text)) {
+                return 'ar';
+            }
+
+            if (/[\u0900-\u097F]/u.test(text)) {
+                return 'hi';
+            }
+
+            if (/[\u0E00-\u0E7F]/u.test(text)) {
+                return 'th';
+            }
+
+            if (/[\u3040-\u30FF]/u.test(text)) {
+                return 'ja';
+            }
+
+            if (/[\uAC00-\uD7AF]/u.test(text)) {
+                return 'ko';
+            }
+
+            if (/[\u4E00-\u9FFF]/u.test(text)) {
+                return 'zh';
+            }
+
+            if (/[\u0370-\u03FF]/u.test(text)) {
+                return 'el';
+            }
+
+            if (/[\u0400-\u04FF]/u.test(text)) {
+                return 'ru';
+            }
+
+            return 'en';
+        }
+
+        function resolveSpeechLang(code) {
+            if (code === 'auto') {
+                return navigator.language || 'en-US';
+            }
+
+            return speechLangMapping[code] || navigator.language || 'en-US';
+        }
+
+        function applyLanguageStyle(element, baseClass, langCode) {
+            element.className = `${baseClass} ${fontMapping[langCode] || 'font-default'} ${rtlLanguages.includes(langCode) ? 'rtl' : 'ltr'}`;
+
+            if (langCode === 'auto') {
+                element.removeAttribute('lang');
+                return;
+            }
+
+            element.setAttribute('lang', langCode);
+        }
+
+        function updateSourcePresentation() {
+            const effectiveLanguage = sourceLang.value === 'auto'
+                ? detectDisplayLanguage(source.value)
+                : sourceLang.value;
+
+            applyLanguageStyle(source, 'text-surface', effectiveLanguage);
+        }
+
+        function updateTargetPresentation() {
+            applyLanguageStyle(target, 'translation-output', targetLang.value);
+            target.classList.toggle('is-empty', !target.textContent.trim());
+        }
+
+        function updateStats() {
+            const sourceText = source.value.trim();
+            const targetText = target.textContent.trim();
+
+            sourceStats.textContent = `${sourceText.length} characters • ${countWords(sourceText)} words`;
+            targetStats.textContent = `${targetText.length} characters • ${countWords(targetText)} words`;
+        }
+
+        function updateStatus(message) {
+            status.textContent = message;
+        }
+
+        function updateTheme(theme) {
+            document.documentElement.dataset.theme = theme;
+            themeSelect.value = theme;
+            themeColorMeta.setAttribute('content', THEME_COLORS[theme] || THEME_COLORS.midnight);
+            safeWriteString(STORAGE_KEYS.theme, theme);
+        }
+
+        function updateConnectivity() {
+            const online = navigator.onLine;
+            offlineBadge.textContent = online ? 'Online' : 'Offline shell';
+            offlineBadge.classList.toggle('offline', !online);
+
+            if (!online) {
+                updateStatus('Offline: saved translations and the app shell still work. New translations resume once the connection returns.');
+            }
+        }
+
+        function buildShareUrl() {
+            return new URL('./', window.location.href).href;
+        }
+
+        function buildQrCodeUrl() {
+            return `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(buildShareUrl())}&color=ff5ea8&bgcolor=0d1024&format=svg`;
+        }
+
+        function refreshQrCode() {
+            qrImage.src = buildQrCodeUrl();
+            qrImage.onerror = () => {
+                qrImage.onerror = null;
+                qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(buildShareUrl())}`;
+            };
+        }
+
+        function createFloatingGems() {
+            const gemTypes = ['✦', '◆', '✷', '◈'];
+
+            for (let index = 0; index < 6; index += 1) {
+                const gem = document.createElement('div');
+                gem.className = 'gem';
+                gem.textContent = gemTypes[Math.floor(Math.random() * gemTypes.length)];
+                gem.style.left = `${Math.random() * 100}%`;
+                gem.style.animationDelay = `${Math.random() * 8}s`;
+                gem.style.animationDuration = `${10 + Math.random() * 8}s`;
+                gem.style.color = `hsl(${Math.floor(Math.random() * 360)}, 95%, 74%)`;
+                document.body.appendChild(gem);
+            }
+        }
+
+        function setTargetText(text) {
+            target.innerHTML = '';
+
+            if (!text) {
+                updateTargetPresentation();
+                updateStats();
+                return;
+            }
+
+            const lines = text.split('\n');
+            let wordIndex = 0;
+
+            lines.forEach((line, lineIndex) => {
+                if (lineIndex > 0) {
+                    target.appendChild(document.createElement('br'));
+                }
+
+                const segments = line.split(/(\s+)/);
+                segments.forEach(segment => {
+                    if (/^\s+$/.test(segment)) {
+                        target.appendChild(document.createTextNode(segment));
+                    } else if (segment) {
+                        const span = document.createElement('span');
+                        span.className = 'twinkle-word';
+                        span.textContent = segment;
+                        const delay = wordIndex * 52 + Math.random() * 22;
+                        span.style.animationDelay = `${delay}ms`;
+                        target.appendChild(span);
+                        wordIndex += 1;
+                    }
+                });
+            });
+
+            updateTargetPresentation();
+            updateStats();
+        }
+
+        function createEntry(sourceText, targetText) {
+            const entry = {
+                id: createId(),
+                sourceText,
+                targetText,
+                sourceLang: sourceLang.value,
+                targetLang: targetLang.value,
+                createdAt: Date.now()
+            };
+
+            entry.key = buildTranslationKey(entry);
+            return entry;
+        }
+
+        function isFavoriteEntry(entry) {
+            if (!entry) {
+                return false;
+            }
+
+            return favoriteEntries.some(item => item.key === entry.key);
+        }
+
+        function updateFavoriteButton() {
+            favoriteBtn.textContent = isFavoriteEntry(lastTranslation) ? 'Saved' : 'Save';
+            favoriteBtn.classList.toggle('active', isFavoriteEntry(lastTranslation));
+        }
+
+        function persistCollections() {
+            safeWrite(STORAGE_KEYS.history, historyEntries);
+            safeWrite(STORAGE_KEYS.favorites, favoriteEntries);
+        }
+
+        function formatTime(timestamp) {
+            return new Date(timestamp).toLocaleString([], {
+                month: 'short',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit'
+            });
+        }
+
+        function renderCollection(container, entries, emptyText) {
+            container.innerHTML = '';
+
+            if (!entries.length) {
+                const empty = document.createElement('div');
+                empty.className = 'empty-message';
+                empty.textContent = emptyText;
+                container.appendChild(empty);
+                return;
+            }
+
+            entries.forEach(entry => {
+                const item = document.createElement('article');
+                item.className = 'collection-item';
+
+                const meta = document.createElement('div');
+                meta.className = 'collection-meta';
+
+                const route = document.createElement('span');
+                route.className = 'collection-route';
+                route.textContent = `${getLanguageName(sourceLang, entry.sourceLang)} → ${getLanguageName(targetLang, entry.targetLang)}`;
+
+                const time = document.createElement('span');
+                time.textContent = formatTime(entry.createdAt);
+
+                meta.append(route, time);
+
+                const preview = document.createElement('div');
+                preview.className = 'collection-preview';
+
+                const sourcePreview = document.createElement('div');
+                sourcePreview.className = 'collection-source';
+                sourcePreview.textContent = truncateText(entry.sourceText, 110);
+
+                const targetPreview = document.createElement('div');
+                targetPreview.className = 'collection-target';
+                targetPreview.textContent = truncateText(entry.targetText, 110);
+
+                preview.append(sourcePreview, targetPreview);
+
+                const actions = document.createElement('div');
+                actions.className = 'collection-actions';
+
+                const loadButton = document.createElement('button');
+                loadButton.type = 'button';
+                loadButton.className = 'secondary';
+                loadButton.dataset.action = 'load';
+                loadButton.dataset.key = entry.key;
+                loadButton.textContent = 'Load';
+
+                const copyButton = document.createElement('button');
+                copyButton.type = 'button';
+                copyButton.className = 'secondary';
+                copyButton.dataset.action = 'copy';
+                copyButton.dataset.key = entry.key;
+                copyButton.textContent = 'Copy';
+
+                const favoriteButton = document.createElement('button');
+                favoriteButton.type = 'button';
+                favoriteButton.dataset.action = 'favorite';
+                favoriteButton.dataset.key = entry.key;
+                favoriteButton.textContent = isFavoriteEntry(entry) ? 'Unsave' : 'Save';
+
+                actions.append(loadButton, copyButton, favoriteButton);
+                item.append(meta, preview, actions);
+                container.appendChild(item);
+            });
+        }
+
+        function renderCollections() {
+            renderCollection(historyList, historyEntries, 'No recent translations yet.');
+            renderCollection(favoritesList, favoriteEntries, 'Favorite translations will appear here.');
+            updateFavoriteButton();
+        }
+
+        function storeHistoryEntry(entry) {
+            historyEntries = [
+                entry,
+                ...historyEntries.filter(item => item.key !== entry.key)
+            ].slice(0, MAX_HISTORY);
+
+            persistCollections();
+            renderCollections();
+        }
+
+        function storeFavoriteEntry(entry) {
+            favoriteEntries = [
+                entry,
+                ...favoriteEntries.filter(item => item.key !== entry.key)
+            ].slice(0, MAX_FAVORITES);
+
+            persistCollections();
+            renderCollections();
+        }
+
+        function removeFavoriteEntry(entry) {
+            favoriteEntries = favoriteEntries.filter(item => item.key !== entry.key);
+            persistCollections();
+            renderCollections();
+        }
+
+        function loadEntry(entry) {
+            sourceLang.value = entry.sourceLang;
+            targetLang.value = entry.targetLang;
+            source.value = entry.sourceText;
+            updateSourcePresentation();
+            setTargetText(entry.targetText);
+            lastTranslation = entry;
+            updateFavoriteButton();
+            translationMeta.textContent = `Loaded saved translation • ${formatTime(entry.createdAt)}`;
+            updateStatus('Saved translation loaded.');
+        }
+
+        async function copyText(text, successMessage) {
+            if (!text) {
+                updateStatus('Nothing to copy yet.');
+                return;
+            }
+
+            try {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    await navigator.clipboard.writeText(text);
+                } else {
+                    const helper = document.createElement('textarea');
+                    helper.value = text;
+                    document.body.appendChild(helper);
+                    helper.select();
+                    document.execCommand('copy');
+                    helper.remove();
+                }
+
+                updateStatus(successMessage);
+            } catch (error) {
+                console.error('Copy failed:', error);
+                updateStatus('Copy failed in this browser.');
+            }
+        }
+
+        function chooseVoice(lang) {
+            const voices = window.speechSynthesis.getVoices();
+            const exactMatch = voices.find(voice => voice.lang.toLowerCase() === lang.toLowerCase());
+
+            if (exactMatch) {
+                return exactMatch;
+            }
+
+            return voices.find(voice => voice.lang.toLowerCase().startsWith(lang.split('-')[0].toLowerCase())) || null;
+        }
+
+        function speakText(text, langCode, label) {
+            if (!text) {
+                updateStatus(`Nothing to speak from ${label}.`);
+                return;
+            }
+
+            if (!('speechSynthesis' in window)) {
+                updateStatus('Speech playback is not supported in this browser.');
+                return;
+            }
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = resolveSpeechLang(langCode);
+
+            const voice = chooseVoice(utterance.lang);
+            if (voice) {
+                utterance.voice = voice;
+            }
+
+            utterance.onerror = () => {
+                updateStatus('Speech playback failed.');
+            };
+
+            window.speechSynthesis.cancel();
+            window.speechSynthesis.speak(utterance);
+            updateStatus(`Speaking ${label}.`);
+        }
+
+        function queueTranslation(delay = WAIT_TIME) {
+            window.clearTimeout(translationTimer);
+            translationJobId += 1;
+            const jobId = translationJobId;
+
+            const text = source.value.trim();
+            updateSourcePresentation();
+            updateStats();
+
+            if (!text) {
+                lastTranslation = null;
+                setTargetText('');
+                translationMeta.textContent = 'Ready for live translation';
+                updateStatus('Ready. Type or speak to start translating.');
+                updateFavoriteButton();
+                return;
+            }
+
+            if (sourceLang.value !== 'auto' && sourceLang.value === targetLang.value) {
+                const mirrored = createEntry(text, text);
+                lastTranslation = mirrored;
+                setTargetText(text);
+                translationMeta.textContent = 'Source and target match, so the text is mirrored.';
+                updateStatus('Source and target languages match.');
+                updateFavoriteButton();
+                return;
+            }
+
+            translationMeta.textContent = delay === 0 ? 'Translating now...' : 'Listening for a pause before translating...';
+            updateStatus(delay === 0 ? 'Translating...' : 'Listening for a pause...');
+
+            translationTimer = window.setTimeout(() => {
+                triggerTranslation(jobId);
+            }, delay);
+        }
+
+        async function translateText(text, fromLang, toLang) {
+            if (!text) {
+                return '';
+            }
+
+            if (!navigator.onLine) {
+                return '';
+            }
+
+            const sourceCode = fromLang === 'auto' ? 'auto' : fromLang;
+            const apis = [
+                {
+                    name: 'Google',
+                    url: `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sourceCode}&tl=${toLang}&dt=t&q=${encodeURIComponent(text)}`
+                },
+                {
+                    name: 'MyMemory',
+                    url: `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${sourceCode === 'auto' ? 'autodetect' : sourceCode}|${toLang}`
+                },
+                {
+                    name: 'Lingva',
+                    url: `https://lingva.lunar.icu/api/v1/${sourceCode}/${toLang}/${encodeURIComponent(text)}`
+                }
+            ];
+
+            for (const api of apis) {
+                try {
+                    const response = await fetch(api.url);
+                    if (!response.ok) {
+                        continue;
+                    }
+
+                    const data = await response.json();
+
+                    if (api.name === 'Google' && Array.isArray(data[0])) {
+                        const translated = data[0]
+                            .map(item => Array.isArray(item) && item[0] ? item[0] : '')
+                            .join('')
+                            .trim();
+
+                        if (translated) {
+                            return translated;
+                        }
+                    }
+
+                    if (api.name === 'MyMemory' && data.responseData && data.responseData.translatedText) {
+                        let translated = data.responseData.translatedText.trim();
+
+                        if (translated.includes('MYMEMORY WARNING')) {
+                            translated = translated.split('MYMEMORY WARNING')[0].trim();
+                        }
+
+                        if (translated && !translated.includes('PLEASE SELECT') && !translated.includes('INVALID')) {
+                            return translated;
+                        }
+                    }
+
+                    if (api.name === 'Lingva' && data.translation) {
+                        return data.translation.trim();
+                    }
+                } catch (error) {
+                    console.warn(`${api.name} API failed:`, error);
+                }
+            }
+
+            return '';
+        }
+
+        async function triggerTranslation(jobId) {
+            const text = source.value.trim();
+            if (!text || jobId !== translationJobId) {
+                return;
+            }
+
+            if (!navigator.onLine) {
+                translationMeta.textContent = 'Offline. Waiting for a connection.';
+                updateStatus('Offline: connect again to translate new text.');
+                return;
+            }
+
+            try {
+                const translated = await translateText(text, sourceLang.value, targetLang.value);
+
+                if (jobId !== translationJobId) {
+                    return;
+                }
+
+                if (!translated) {
+                    translationMeta.textContent = 'No translation returned. Try again when the network is stable.';
+                    updateStatus('Translation failed or no response was returned.');
+                    return;
+                }
+
+                const entry = createEntry(text, translated);
+                lastTranslation = entry;
+                setTargetText(translated);
+                target.classList.remove('flash');
+                void target.offsetWidth;
+                target.classList.add('flash');
+                translationMeta.textContent = `Updated ${formatTime(entry.createdAt)}`;
+                updateStatus('Translation updated.');
+                storeHistoryEntry(entry);
+
+                if (autoPronounceToggle.checked) {
+                    speakText(translated, targetLang.value, 'translation');
+                }
+            } catch (error) {
+                console.error('Translation error:', error);
+                translationMeta.textContent = 'Translation error.';
+                updateStatus('Translation error.');
+            }
+        }
+
+        function swapLanguages() {
+            if (sourceLang.value === 'auto') {
+                updateStatus('Choose a source language before swapping.');
+                return;
+            }
+
+            const currentSourceLang = sourceLang.value;
+            const currentTargetLang = targetLang.value;
+            const currentSourceText = source.value.trim();
+            const currentTargetText = target.textContent.trim();
+
+            sourceLang.value = currentTargetLang;
+            targetLang.value = currentSourceLang;
+
+            if (currentTargetText) {
+                source.value = currentTargetText;
+                setTargetText(currentSourceText);
+            }
+
+            updateSourcePresentation();
+            updateTargetPresentation();
+            updateStats();
+            queueTranslation(0);
+            updateStatus('Languages swapped.');
+        }
+
+        function clearAll() {
+            window.clearTimeout(translationTimer);
+            translationJobId += 1;
+            source.value = '';
+            setTargetText('');
+            lastTranslation = null;
+            translationMeta.textContent = 'Ready for live translation';
+            updateSourcePresentation();
+            updateStats();
+            updateFavoriteButton();
+            updateStatus('Cleared.');
+            source.focus();
+        }
+
+        function testLanguageInput() {
+            const langCode = sourceLang.value === 'auto' ? 'en' : sourceLang.value;
+            const sampleText = testPhrases[langCode] || testPhrases.en;
+
+            source.value = sampleText;
+            updateSourcePresentation();
+            updateStats();
+            queueTranslation(180);
+            updateStatus(`Loaded sample text for ${getLanguageName(sourceLang, langCode)}.`);
+        }
+
+        function toggleFavorite() {
+            if (!lastTranslation) {
+                updateStatus('Translate something first, then save it.');
+                return;
+            }
+
+            if (isFavoriteEntry(lastTranslation)) {
+                removeFavoriteEntry(lastTranslation);
+                updateStatus('Removed from favorites.');
+            } else {
+                storeFavoriteEntry(lastTranslation);
+                updateStatus('Saved to favorites.');
+            }
+        }
+
+        function findEntryByKey(key) {
+            return historyEntries.find(entry => entry.key === key) || favoriteEntries.find(entry => entry.key === key) || null;
+        }
+
+        function handleCollectionAction(event) {
+            const button = event.target.closest('button[data-action]');
+            if (!button) {
+                return;
+            }
+
+            const entry = findEntryByKey(button.dataset.key);
+            if (!entry) {
+                return;
+            }
+
+            const action = button.dataset.action;
+
+            if (action === 'load') {
+                loadEntry(entry);
+                return;
+            }
+
+            if (action === 'copy') {
+                copyText(entry.targetText, 'Saved translation copied.');
+                return;
+            }
+
+            if (action === 'favorite') {
+                if (isFavoriteEntry(entry)) {
+                    removeFavoriteEntry(entry);
+                    updateStatus('Removed from favorites.');
+                } else {
+                    storeFavoriteEntry(entry);
+                    updateStatus('Saved to favorites.');
+                }
+            }
+        }
+
+        function clearCollection(kind) {
+            const isHistory = kind === 'history';
+            const label = isHistory ? 'history' : 'favorites';
+            const confirmed = window.confirm(`Clear ${label}?`);
+
+            if (!confirmed) {
+                return;
+            }
+
+            if (isHistory) {
+                historyEntries = [];
+            } else {
+                favoriteEntries = [];
+            }
+
+            persistCollections();
+            renderCollections();
+            updateStatus(`Cleared ${label}.`);
+        }
+
+        function setupVoiceInput() {
+            const SpeechRecognitionClass = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+            if (!SpeechRecognitionClass) {
+                voiceBtn.disabled = true;
+                voiceBtn.textContent = 'Voice Unavailable';
+                return;
+            }
+
+            recognition = new SpeechRecognitionClass();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            recognition.onstart = () => {
+                isRecognizing = true;
+                voiceBtn.textContent = 'Listening...';
+                voiceBtn.classList.add('active');
+                updateStatus('Listening for voice input...');
+            };
+
+            recognition.onend = () => {
+                isRecognizing = false;
+                voiceBtn.textContent = 'Voice Input';
+                voiceBtn.classList.remove('active');
+            };
+
+            recognition.onerror = event => {
+                isRecognizing = false;
+                voiceBtn.textContent = 'Voice Input';
+                voiceBtn.classList.remove('active');
+
+                if (event.error === 'not-allowed') {
+                    updateStatus('Microphone blocked. Click Allow in your browser and try again.');
+                } else if (event.error === 'network') {
+                    updateStatus('Voice needs a secure connection. Open this file with a local server (e.g. VS Code Live Server) instead of file://');
+                } else {
+                    updateStatus(`Voice input error: ${event.error.replace(/-/g, ' ')}.`);
+                }
+            };
+
+            recognition.onresult = event => {
+                const transcript = Array.from(event.results)
+                    .map(result => result[0] && result[0].transcript ? result[0].transcript : '')
+                    .join(' ')
+                    .trim();
+
+                if (!transcript) {
+                    return;
+                }
+
+                source.value = source.value.trim()
+                    ? `${source.value.trim()} ${transcript}`
+                    : transcript;
+
+                updateSourcePresentation();
+                updateStats();
+                queueTranslation(120);
+                updateStatus('Voice input captured.');
+            };
+        }
+
+        function toggleVoiceInput() {
+            if (!recognition) {
+                updateStatus('Voice input is not supported in this browser.');
+                return;
+            }
+
+            if (isRecognizing) {
+                recognition.stop();
+                return;
+            }
+
+            try {
+                recognition.lang = resolveSpeechLang(sourceLang.value);
+                recognition.start();
+            } catch (error) {
+                isRecognizing = false;
+                voiceBtn.textContent = 'Voice Input';
+                voiceBtn.classList.remove('active');
+                updateStatus('Could not start voice input — try again, or open this file via a local server for full mic support.');
+            }
+        }
+
+        function setupPwa() {
+            window.addEventListener('beforeinstallprompt', event => {
+                event.preventDefault();
+                deferredPrompt = event;
+                installBtn.hidden = false;
+            });
+
+            window.addEventListener('appinstalled', () => {
+                deferredPrompt = null;
+                installBtn.hidden = true;
+                updateStatus('App installed.');
+            });
+
+            installBtn.addEventListener('click', async () => {
+                if (!deferredPrompt) {
+                    updateStatus('Install is not available right now.');
+                    return;
+                }
+
+                deferredPrompt.prompt();
+                const result = await deferredPrompt.userChoice;
+                updateStatus(result.outcome === 'accepted' ? 'App installed.' : 'Install dismissed.');
+                deferredPrompt = null;
+                installBtn.hidden = true;
+            });
+
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('sw.js').catch(error => {
+                    console.warn('Service worker registration failed:', error);
+                });
+            }
+        }
+
+        function setupEventListeners() {
+            source.addEventListener('input', () => queueTranslation(WAIT_TIME));
+            source.addEventListener('focus', () => {
+                if (!source.value.trim()) {
+                    updateStatus('Ready. Type or speak to start translating.');
+                }
+            });
+
+            sourceLang.addEventListener('change', () => {
+                updateSourcePresentation();
+                queueTranslation(0);
+            });
+
+            targetLang.addEventListener('change', () => {
+                updateTargetPresentation();
+                queueTranslation(0);
+            });
+
+            themeSelect.addEventListener('change', () => updateTheme(themeSelect.value));
+            autoPronounceToggle.addEventListener('change', () => {
+                safeWriteString(STORAGE_KEYS.autoPronounce, autoPronounceToggle.checked ? 'true' : 'false');
+            });
+
+            swapBtn.addEventListener('click', swapLanguages);
+            clearBtn.addEventListener('click', clearAll);
+            testBtn.addEventListener('click', testLanguageInput);
+            voiceBtn.addEventListener('click', toggleVoiceInput);
+            speakSourceBtn.addEventListener('click', () => speakText(source.value.trim(), sourceLang.value, 'source text'));
+            speakTargetBtn.addEventListener('click', () => speakText(target.textContent.trim(), targetLang.value, 'translation'));
+            copyBtn.addEventListener('click', () => copyText(target.textContent.trim(), 'Translation copied.'));
+            favoriteBtn.addEventListener('click', toggleFavorite);
+            clearHistoryBtn.addEventListener('click', () => clearCollection('history'));
+            clearFavoritesBtn.addEventListener('click', () => clearCollection('favorites'));
+
+            qrBtn.addEventListener('click', () => {
+                qrPopup.classList.add('active');
+                qrPopup.setAttribute('aria-hidden', 'false');
+            });
+
+            qrClose.addEventListener('click', () => {
+                qrPopup.classList.remove('active');
+                qrPopup.setAttribute('aria-hidden', 'true');
+            });
+
+            qrPopup.addEventListener('click', event => {
+                if (event.target === qrPopup) {
+                    qrPopup.classList.remove('active');
+                    qrPopup.setAttribute('aria-hidden', 'true');
+                }
+            });
+
+            historyList.addEventListener('click', handleCollectionAction);
+            favoritesList.addEventListener('click', handleCollectionAction);
+
+            document.addEventListener('keydown', event => {
+                if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
+                    queueTranslation(0);
+                }
+
+                if (event.key === 'Escape') {
+                    qrPopup.classList.remove('active');
+                    qrPopup.setAttribute('aria-hidden', 'true');
+                }
+            });
+
+            window.addEventListener('online', updateConnectivity);
+            window.addEventListener('offline', updateConnectivity);
+        }
+
+        function loadPersistedState() {
+            const savedTheme = safeReadString(STORAGE_KEYS.theme, 'midnight');
+            const savedAutoPronounce = safeReadString(STORAGE_KEYS.autoPronounce, 'false') === 'true';
+
+            historyEntries = safeRead(STORAGE_KEYS.history, [])
+                .map(normalizeEntry)
+                .filter(Boolean)
+                .slice(0, MAX_HISTORY);
+            favoriteEntries = safeRead(STORAGE_KEYS.favorites, [])
+                .map(normalizeEntry)
+                .filter(Boolean)
+                .slice(0, MAX_FAVORITES);
+
+            autoPronounceToggle.checked = savedAutoPronounce;
+            updateTheme(savedTheme);
+            renderCollections();
+        }
+
+        function init() {
+            loadPersistedState();
+            updateSourcePresentation();
+            updateTargetPresentation();
+            updateStats();
+            updateConnectivity();
+            refreshQrCode();
+            createFloatingGems();
+            setupVoiceInput();
+            setupPwa();
+            setupEventListeners();
+            source.focus();
+
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.getVoices();
+                window.speechSynthesis.addEventListener('voiceschanged', () => {
+                    window.speechSynthesis.getVoices();
+                });
+            }
+        }
+
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>

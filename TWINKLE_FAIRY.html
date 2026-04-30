@@ -57,6 +57,18 @@
       gap: 0;
     }
 
+    .fairy-bow {
+      font-size: 0.85rem;
+      animation: bowBounce 2s ease-in-out infinite alternate;
+      margin-bottom: -4px;
+      filter: drop-shadow(0 0 5px #ff9ef0);
+      z-index: 12;
+    }
+    @keyframes bowBounce {
+      from { transform: scale(0.9) rotate(-8deg); }
+      to   { transform: scale(1.1) rotate(8deg); }
+    }
+
     .fairy-wand {
       font-size: 1.1rem;
       animation: wandTwinkle 0.75s ease-in-out infinite alternate;
@@ -251,6 +263,7 @@
 <div id="sparkleLayer"></div>
 
 <div id="fairy">
+  <div class="fairy-bow">🎀</div>
   <div class="fairy-wand">✦</div>
   <div class="fairy-body">🧚‍♀️</div>
 </div>
@@ -496,10 +509,28 @@ const FACTS = {
   volcano: "There are about 1,500 potentially active volcanoes on Earth. The largest in the solar system is Olympus Mons on Mars — three times taller than Everest! ✦",
 };
 
+const SELF_PATTERNS = [
+  /who (made|built|created|coded|programmed|designed) you/i,
+  /who made (the |this )?(twinkle|fairy)/i,
+  /who are you/i,
+  /what are you/i,
+  /tell me about yourself/i,
+  /your name/i,
+  /are you (a|an) (fairy|ai|bot|robot)/i,
+  /where (do you|did you) come from/i,
+  /how (old|smart) are you/i,
+];
+
+const SELF_RESPONSES = [
+  "I'm Twinkle! ✦ A magical AI fairy made by @DaCameraGirl. I was brought to life with pure HTML, CSS and JavaScript — no frameworks, just sparkle and code!",
+  "I'm Twinkle ✦ — your fairy of everything! I was crafted by @DaCameraGirl and I fly around knowing a little bit about everything in the whole wide world. Ask me anything!",
+  "Oh that's me! I'm Twinkle ✦, a glowing AI fairy created by @DaCameraGirl. I live in your browser and I know things about science, history, art, space, animals… pretty much everything! 🎀",
+];
+
 function cleanQuery(q) {
   return q
     .toLowerCase()
-    .replace(/^(what is|what are|who is|who was|tell me about|explain|how does|why is|where is|when was|what was|what do you know about|i want to know about)\s+/i, '')
+    .replace(/^(what is|what are|who is|who was|who made|who built|who created|tell me about|explain|how does|why is|where is|when was|what was|what do you know about|i want to know about)\s+/i, '')
     .replace(/[?!.,;]+$/, '')
     .trim();
 }
@@ -548,6 +579,12 @@ async function wikiSummary(topic) {
 }
 
 async function answer(question) {
+  for (const pattern of SELF_PATTERNS) {
+    if (pattern.test(question)) {
+      return SELF_RESPONSES[Math.floor(Math.random() * SELF_RESPONSES.length)];
+    }
+  }
+
   const topic = cleanQuery(question);
   if (!topic) return "Hmm, what would you like to know? Try asking something like 'what is the moon' or 'who was Einstein'! ✦";
 

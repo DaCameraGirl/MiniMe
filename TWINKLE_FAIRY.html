@@ -547,6 +547,12 @@ const HELP_RESPONSES = [
   "Lots! ✦ I can tell you about science, history, geography, animals, space, technology, famous people, and more. Just ask me anything — like 'what is gravity' or 'who was Shakespeare'! 🎀",
 ];
 
+const CAPABILITY_RESPONSES = [
+  "I'm a knowledge fairy, not a doer! ✦ I can't code, build, or calculate for you — but I can tell you ABOUT anything in the world. Ask me 'what is Python' or 'how does HTML work' and I'll explain it! 🎀",
+  "Hmm, I'm a fairy of knowledge not action! ✦ I can't write code or do tasks — but I know things about almost every subject. Try asking me 'what is JavaScript' or 'who invented the computer'! ✦",
+  "I'm more of a know-it-all than a do-it-all! 🎀 I live to share sparkly facts. Ask me what something IS rather than asking me to do it — like 'what is machine learning' or 'how does WiFi work'! ✦",
+];
+
 function normalizeSpeak(q) {
   return q
     .replace(/\br\b/gi,   'are')
@@ -630,6 +636,17 @@ async function wikiSummary(topic) {
   return null;
 }
 
+const CAPABILITY_PATTERNS = [
+  /^(can|could|do|are|would) you/i,
+  /do you know how to/i,
+  /are you able to/i,
+  /can you (code|program|build|make|create|write|draw|sing|dance|speak|translate|calculate|solve|hack|design)/i,
+  /could you (code|program|build|make|create|write|draw|sing|dance|speak|translate|calculate|solve|hack|design)/i,
+  /do you (code|program|speak|know) (python|javascript|html|css|java|ruby|rust|sql|react|coding|programming)/i,
+  /can you use (python|javascript|html|css|java|ruby|rust|sql|react)/i,
+  /could you use (python|javascript|html|css|java|ruby|rust|sql|react)/i,
+];
+
 const HELP_PATTERNS = [
   /what can you (do|help|tell|say)/i,
   /what do you (do|know|say)/i,
@@ -642,6 +659,12 @@ const HELP_PATTERNS = [
 
 async function answer(rawQuestion) {
   const question = normalizeSpeak(rawQuestion);
+
+  for (const pattern of CAPABILITY_PATTERNS) {
+    if (pattern.test(question)) {
+      return CAPABILITY_RESPONSES[Math.floor(Math.random() * CAPABILITY_RESPONSES.length)];
+    }
+  }
 
   for (const pattern of HELP_PATTERNS) {
     if (pattern.test(question)) {

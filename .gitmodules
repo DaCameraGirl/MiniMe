@@ -13,18 +13,9 @@
 [submodule "Typescript-advance"]
 	path = Typescript-advance
 	url = https://github.com/virajpwdn/Typescript-advance
-[submodule "Coding-Practice-32-CAR"]
-	path = Coding-Practice-32-CAR
-	url = https://github.com/namensenn/Coding-Practice-32-CAR
 [submodule "JAVA"]
 	path = JAVA
 	url = https://github.com/suryadwd/JAVA
-[submodule "how_to_become_10x_developer"]
-	path = how_to_become_10x_developer
-	url = https://github.com/prazian/how_to_become_10x_developer
-[submodule "thesis"]
-	path = thesis
-	url = https://github.com/alueg/thesis
 [submodule "ui-gen"]
 	path = ui-gen
 	url = https://github.com/yousseftastift/ui-gen
@@ -49,9 +40,6 @@
 [submodule "live-wallpaper"]
 	path = live-wallpaper
 	url = https://github.com/jhgdfuygfdukbyihs/live-wallpaper
-[submodule "ml-pipeline-wine-azure"]
-	path = ml-pipeline-wine-azure
-	url = https://github.com/HammadNazir048/ml-pipeline-wine-azure
 [submodule "Gemini-Chatbot-Interface-with-Streamlit"]
 	path = Gemini-Chatbot-Interface-with-Streamlit
 	url = https://github.com/ilhansevval/Gemini-Chatbot-Interface-with-Streamlit
